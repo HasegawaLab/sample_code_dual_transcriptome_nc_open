@@ -1,0 +1,407 @@
+row,column,cor,p
+PPV use,Age,-0.238182554,0.000172914
+PPV use,Sex,0.08860674,0.167682309
+Age,Sex,-0.080652278,0.209331533
+PPV use,Race/ethnicity,-0.063213865,0.325437446
+Age,Race/ethnicity,-0.021138022,0.742512742
+Sex,Race/ethnicity,0.073598785,0.252084825
+PPV use,Virus,-0.040904244,0.524822105
+Age,Virus,0.242005094,0.000134684
+Sex,Virus,-0.050305298,0.4340652
+Race/ethnicity,Virus,0.081242208,0.20600805
+PPV use,T cell regulation,-0.240401807,0.000149639
+Age,T cell regulation,0.117039829,0.06798442
+Sex,T cell regulation,0.012937235,0.840654189
+Race/ethnicity,T cell regulation,0.056266606,0.381523469
+Virus,T cell regulation,-0.052944128,0.410312061
+PPV use,Neutrophil/IL-1 ,0.231052848,0.000272634
+Age,Neutrophil/IL-1 ,-0.035219011,0.584046655
+Sex,Neutrophil/IL-1 ,-0.064448796,0.316056063
+Race/ethnicity,Neutrophil/IL-1 ,0.05949689,0.354748082
+Virus,Neutrophil/IL-1 ,0.049815078,0.438563245
+T cell regulation,Neutrophil/IL-1 ,-0.123363444,0.054296889
+PPV use,GPCR,-0.207903044,0.00108832
+Age,GPCR,0.003442348,0.957337329
+Sex,GPCR,-0.001186902,0.985284006
+Race/ethnicity,GPCR,-0.008111515,0.899686533
+Virus,GPCR,-0.021445506,0.73890206
+T cell regulation,GPCR,0.37558042,1.36E-09
+Neutrophil/IL-1 ,GPCR,0.235993705,0.000199151
+PPV use,Type I IFN,-0.207457856,0.001116133
+Age,Type I IFN,0.073230644,0.254471357
+Sex,Type I IFN,0.080828048,0.208337288
+Race/ethnicity,Type I IFN,-0.072546307,0.258949074
+Virus,Type I IFN,-0.027204135,0.672413215
+T cell regulation,Type I IFN,0.234697595,0.000216393
+Neutrophil/IL-1 ,Type I IFN,-0.220869939,0.000510088
+GPCR,Type I IFN,0.282324903,7.50E-06
+PPV use,HR-1,-0.206344884,0.001188545
+Age,HR-1,-0.023818867,0.711230083
+Sex,HR-1,0.144208632,0.024269746
+Race/ethnicity,HR-1,-0.08754848,0.172836088
+Virus,HR-1,-0.013698779,0.831410462
+T cell regulation,HR-1,0.338019652,6.19E-08
+Neutrophil/IL-1 ,HR-1,-0.46397036,2.00E-14
+GPCR,HR-1,0.179410926,0.004939683
+Type I IFN,HR-1,0.273618907,1.46E-05
+PPV use,ATP synthesis,0.196995925,0.001989965
+Age,ATP synthesis,-0.009339857,0.88459463
+Sex,ATP synthesis,0.044983598,0.484294485
+Race/ethnicity,ATP synthesis,0.040415676,0.529789098
+Virus,ATP synthesis,-0.086805454,0.176524382
+T cell regulation,ATP synthesis,-0.030363184,0.63695432
+Neutrophil/IL-1 ,ATP synthesis,0.38141333,7.19E-10
+GPCR,ATP synthesis,-0.41945983,8.12E-12
+Type I IFN,ATP synthesis,-0.195900194,0.002110771
+HR-1,ATP synthesis,0.001474542,0.981718215
+PPV use,HF-2,-0.188314749,0.003147734
+Age,HF-2,0.005743855,0.928873776
+Sex,HF-2,0.135069484,0.034971248
+Race/ethnicity,HF-2,-0.098951784,0.123189138
+Virus,HF-2,-0.145358859,0.023147379
+T cell regulation,HF-2,0.150024989,0.019041524
+Neutrophil/IL-1 ,HF-2,-0.447702481,1.98E-13
+GPCR,HF-2,0.020577508,0.749109139
+Type I IFN,HF-2,0.647403442,0
+HR-1,HF-2,0.688467591,0
+ATP synthesis,HF-2,0.07570144,0.238751412
+PPV use,Transcription-translatio,-0.181191732,0.004521111
+Age,Transcription-translatio,0.027293845,0.671395721
+Sex,Transcription-translatio,0.090323266,0.159567979
+Race/ethnicity,Transcription-translatio,-0.025107739,0.696356861
+Virus,Transcription-translatio,0.045241473,0.481790466
+T cell regulation,Transcription-translatio,0.642540343,0
+Neutrophil/IL-1 ,Transcription-translatio,-0.325584757,1.97E-07
+GPCR,Transcription-translatio,0.404083285,5.33E-11
+Type I IFN,Transcription-translatio,0.117799834,0.066203328
+HR-1,Transcription-translatio,0.822261048,0
+ATP synthesis,Transcription-translatio,-0.123877262,0.053293112
+HF-2,Transcription-translatio,0.340464006,4.90E-08
+PPV use,Granulocyte,0.129549863,0.043200139
+Age,Granulocyte,-0.070979115,0.269406918
+Sex,Granulocyte,-0.069671166,0.278352508
+Race/ethnicity,Granulocyte,0.015672568,0.807562962
+Virus,Granulocyte,0.064953514,0.312273182
+T cell regulation,Granulocyte,0.184403719,0.003846096
+Neutrophil/IL-1 ,Granulocyte,0.574775824,0
+GPCR,Granulocyte,0.632862884,0
+Type I IFN,Granulocyte,-0.145147021,0.023350656
+HR-1,Granulocyte,-0.048735074,0.448566252
+ATP synthesis,Granulocyte,-0.210130148,0.000958507
+HF-2,Granulocyte,-0.3346344,8.53E-08
+Transcription-translatio,Granulocyte,0.249234849,8.30E-05
+PPV use,Streptcoccus,0.081469501,0.20473777
+Age,Streptcoccus,0.065947769,0.304908286
+Sex,Streptcoccus,-0.023144595,0.719055152
+Race/ethnicity,Streptcoccus,-0.039482131,0.539345486
+Virus,Streptcoccus,-0.008067467,0.900228428
+T cell regulation,Streptcoccus,-0.001717408,0.978707757
+Neutrophil/IL-1 ,Streptcoccus,0.084849386,0.186512306
+GPCR,Streptcoccus,-0.063577975,0.322652893
+Type I IFN,Streptcoccus,-0.236761954,0.000189546
+HR-1,Streptcoccus,-0.174339657,0.006329047
+ATP synthesis,Streptcoccus,0.005103486,0.936785925
+HF-2,Streptcoccus,-0.277318067,1.10E-05
+Transcription-translatio,Streptcoccus,-0.091572804,0.153849401
+Granulocyte,Streptcoccus,0.005314961,0.934172297
+PPV use,MC-3,0.022229232,0.729725013
+Age,MC-3,-0.001053512,0.98693771
+Sex,MC-3,-0.118708822,0.064123455
+Race/ethnicity,MC-3,-0.035713075,0.57877936
+Virus,MC-3,0.116618984,0.068987407
+T cell regulation,MC-3,-0.123003924,0.055008516
+Neutrophil/IL-1 ,MC-3,0.081662913,0.203661311
+GPCR,MC-3,-0.126835792,0.047808746
+Type I IFN,MC-3,-0.272424281,1.59E-05
+HR-1,MC-3,-0.202282804,0.001490976
+ATP synthesis,MC-3,-0.007691651,0.904853702
+HF-2,MC-3,-0.342381601,4.08E-08
+Transcription-translatio,MC-3,-0.128066973,0.045669624
+Granulocyte,MC-3,0.034484313,0.59192013
+Streptcoccus,MC-3,0.409812813,2.67E-11
+PPV use,MC-2,-0.045186636,0.482322356
+Age,MC-2,0.103461266,0.106929957
+Sex,MC-2,0.034538857,0.591333936
+Race/ethnicity,MC-2,0.028009855,0.663296328
+Virus,MC-2,0.07209059,0.261960822
+T cell regulation,MC-2,0.09232701,0.150473464
+Neutrophil/IL-1 ,MC-2,-0.025467868,0.692221448
+GPCR,MC-2,-0.029127377,0.650733184
+Type I IFN,MC-2,-0.123153621,0.054711275
+HR-1,MC-2,-0.16642504,0.009201344
+ATP synthesis,MC-2,-0.120473836,0.060238004
+HF-2,MC-2,-0.232428369,0.000249975
+Transcription-translatio,MC-2,-0.031361081,0.625918116
+Granulocyte,MC-2,0.043134291,0.502455329
+Streptcoccus,MC-2,0.586401992,0
+MC-3,MC-2,0.385410851,4.61E-10
+PPV use,Haemophilus,0.052087058,0.417941413
+Age,Haemophilus,0.095268031,0.137843528
+Sex,Haemophilus,-0.006409273,0.920659546
+Race/ethnicity,Haemophilus,0.053192718,0.408114687
+Virus,Haemophilus,0.185169788,0.003699184
+T cell regulation,Haemophilus,0.033657567,0.600837497
+Neutrophil/IL-1 ,Haemophilus,0.334936743,8.29E-08
+GPCR,Haemophilus,-0.031470123,0.624717147
+Type I IFN,Haemophilus,-0.140122011,0.028644574
+HR-1,Haemophilus,-0.264797261,2.79E-05
+ATP synthesis,Haemophilus,0.12107274,0.058964508
+HF-2,Haemophilus,-0.295683349,2.59E-06
+Transcription-translatio,Haemophilus,-0.146776865,0.021825603
+Granulocyte,Haemophilus,0.144758766,0.023727219
+Streptcoccus,Haemophilus,0.324594294,2.16E-07
+MC-3,Haemophilus,0.333060875,9.89E-08
+MC-2,Haemophilus,0.468884676,9.77E-15
+PPV use,MC-1,0.105287088,0.100848281
+Age,MC-1,-0.07549002,0.240069264
+Sex,MC-1,-0.000593451,0.992641692
+Race/ethnicity,MC-1,0.027223042,0.672198722
+Virus,MC-1,0.144536197,0.023945437
+T cell regulation,MC-1,-0.066536973,0.300598292
+Neutrophil/IL-1 ,MC-1,-0.115652867,0.071335668
+GPCR,MC-1,-0.074676282,0.24518908
+Type I IFN,MC-1,-0.409951716,2.63E-11
+HR-1,MC-1,-0.126979171,0.047555404
+ATP synthesis,MC-1,-0.233934302,0.000227188
+HF-2,MC-1,-0.433100793,1.41E-12
+Transcription-translatio,MC-1,0.0385851,0.54860823
+Granulocyte,MC-1,0.156529497,0.014380337
+Streptcoccus,MC-1,0.453041399,9.44E-14
+MC-3,MC-1,0.563949155,0
+MC-2,MC-1,0.422611303,5.46E-12
+Haemophilus,MC-1,0.173705232,0.006525451
+PPV use,S.pnuemoniae/S. aureus,0.163161597,0.010688934
+Age,S.pnuemoniae/S. aureus,-0.126342099,0.048689714
+Sex,S.pnuemoniae/S. aureus,-0.06148154,0.338897545
+Race/ethnicity,S.pnuemoniae/S. aureus,0.080070897,0.212644437
+Virus,S.pnuemoniae/S. aureus,-0.006618016,0.918084407
+T cell regulation,S.pnuemoniae/S. aureus,-0.174697347,0.006220661
+Neutrophil/IL-1 ,S.pnuemoniae/S. aureus,0.396043931,1.37E-10
+GPCR,S.pnuemoniae/S. aureus,-0.239424391,0.000159503
+Type I IFN,S.pnuemoniae/S. aureus,-0.347018905,2.60E-08
+HR-1,S.pnuemoniae/S. aureus,-0.435453453,1.03E-12
+ATP synthesis,S.pnuemoniae/S. aureus,0.401472064,7.26E-11
+HF-2,S.pnuemoniae/S. aureus,-0.38543466,4.60E-10
+Transcription-translatio,S.pnuemoniae/S. aureus,-0.410346579,2.50E-11
+Granulocyte,S.pnuemoniae/S. aureus,-0.093167953,0.146775788
+Streptcoccus,S.pnuemoniae/S. aureus,0.417825855,9.96E-12
+MC-3,S.pnuemoniae/S. aureus,0.382523513,6.36E-10
+MC-2,S.pnuemoniae/S. aureus,0.154235489,0.015895334
+Haemophilus,S.pnuemoniae/S. aureus,0.278316791,1.02E-05
+MC-1,S.pnuemoniae/S. aureus,0.270309654,1.86E-05
+PPV use,Moraxella,-0.092599214,0.149268919
+Age,Moraxella,0.162303358,0.011113858
+Sex,Moraxella,0.00011869,0.998528319
+Race/ethnicity,Moraxella,-0.005215989,0.935395418
+Virus,Moraxella,0.120571291,0.060029247
+T cell regulation,Moraxella,0.034215168,0.594816529
+Neutrophil/IL-1 ,Moraxella,0.095430571,0.137169956
+GPCR,Moraxella,0.175725809,0.005918212
+Type I IFN,Moraxella,0.030764656,0.632504449
+HR-1,Moraxella,0.071409985,0.266503444
+ATP synthesis,Moraxella,0.032160721,0.617134097
+HF-2,Moraxella,0.021318497,0.740392798
+Transcription-translatio,Moraxella,0.075577529,0.239523175
+Granulocyte,Moraxella,0.069258888,0.28121342
+Streptcoccus,Moraxella,0.130389205,0.041852755
+MC-3,Moraxella,0.028291744,0.66011828
+MC-2,Moraxella,0.11372894,0.076205894
+Haemophilus,Moraxella,0.233563395,0.000232613
+MC-1,Moraxella,-0.091128376,0.155865341
+S.pnuemoniae/S. aureus,Moraxella,-0.026820151,0.676775069
+PPV use,MF-1,-0.147684416,0.021014334
+Age,MF-1,0.020874326,0.745613744
+Sex,MF-1,-0.01848727,0.773865753
+Race/ethnicity,MF-1,-0.100175488,0.118598301
+Virus,MF-1,0.119671114,0.06198035
+T cell regulation,MF-1,0.116400558,0.06951272
+Neutrophil/IL-1 ,MF-1,0.048665203,0.449217796
+GPCR,MF-1,0.048545373,0.450336455
+Type I IFN,MF-1,0.062117098,0.333918611
+HR-1,MF-1,-0.019928605,0.756768561
+ATP synthesis,MF-1,0.013430286,0.834666896
+HF-2,MF-1,0.041039795,0.523448249
+Transcription-translatio,MF-1,0.000432174,0.994641366
+Granulocyte,MF-1,0.031783913,0.621266642
+Streptcoccus,MF-1,0.270565723,1.83E-05
+MC-3,MF-1,0.163760954,0.010400762
+MC-2,MF-1,0.404243403,5.23E-11
+Haemophilus,MF-1,0.186560505,0.003445378
+MC-1,MF-1,0.051452232,0.423645572
+S.pnuemoniae/S. aureus,MF-1,0.059332034,0.356085319
+Moraxella,MF-1,0.177913595,0.005318234
+PPV use,MF-2,-0.142705242,0.025807166
+Age,MF-2,0.01861158,0.772386739
+Sex,MF-2,-0.006250442,0.922619494
+Race/ethnicity,MF-2,-0.047982762,0.455609565
+Virus,MF-2,0.01717665,0.789507843
+T cell regulation,MF-2,0.080286813,0.211409712
+Neutrophil/IL-1 ,MF-2,0.018600182,0.77252232
+GPCR,MF-2,0.045788336,0.476503541
+Type I IFN,MF-2,0.043492158,0.498913248
+HR-1,MF-2,0.055124364,0.391278828
+ATP synthesis,MF-2,0.036545934,0.569950682
+HF-2,MF-2,0.045567041,0.478639152
+Transcription-translatio,MF-2,0.047478316,0.460366729
+Granulocyte,MF-2,0.013324078,0.835955827
+Streptcoccus,MF-2,0.312130872,6.51E-07
+MC-3,MF-2,0.086799337,0.176554986
+MC-2,MF-2,0.410034331,2.60E-11
+Haemophilus,MF-2,0.220470031,0.000522497
+MC-1,MF-2,0.111866835,0.081172939
+S.pnuemoniae/S. aureus,MF-2,0.027943775,0.664042198
+Moraxella,MF-2,0.147868986,0.020852579
+MF-1,MF-2,0.286505879,5.41E-06
+PPV use,Plasma membrane,-0.359294155,7.58E-09
+Age,Plasma membrane,0.101943127,0.112203558
+Sex,Plasma membrane,-0.070507298,0.272610987
+Race/ethnicity,Plasma membrane,0.031599678,0.62329153
+Virus,Plasma membrane,0.11527673,0.072267345
+T cell regulation,Plasma membrane,0.061367884,0.33979289
+Neutrophil/IL-1 ,Plasma membrane,-0.277596671,1.08E-05
+GPCR,Plasma membrane,0.026333921,0.682313873
+Type I IFN,Plasma membrane,-0.147644603,0.021049368
+HR-1,Plasma membrane,0.024080221,0.708205064
+ATP synthesis,Plasma membrane,-0.30698234,1.01E-06
+HF-2,Plasma membrane,-0.143511443,0.024972619
+Transcription-translatio,Plasma membrane,0.135656539,0.034180005
+Granulocyte,Plasma membrane,0.013328057,0.835907526
+Streptcoccus,Plasma membrane,0.021653859,0.73645868
+MC-3,Plasma membrane,0.180467597,0.004687303
+MC-2,Plasma membrane,0.140223421,0.028528348
+Haemophilus,Plasma membrane,-0.035114924,0.585159163
+MC-1,Plasma membrane,0.456261867,6.00E-14
+S.pnuemoniae/S. aureus,Plasma membrane,-0.052292776,0.416102646
+Moraxella,Plasma membrane,-0.078592,0.221240882
+MF-1,Plasma membrane,0.056553676,0.379095255
+MF-2,Plasma membrane,0.071259714,0.267513624
+PPV use,Protein secretion,-0.031946355,0.619483632
+Age,Protein secretion,-0.220493582,0.000521759
+Sex,Protein secretion,-0.059700895,0.353097658
+Race/ethnicity,Protein secretion,-0.044097011,0.49295667
+Virus,Protein secretion,0.049385322,0.442528295
+T cell regulation,Protein secretion,0.052242893,0.416548077
+Neutrophil/IL-1 ,Protein secretion,0.060147808,0.349498984
+GPCR,Protein secretion,0.068502109,0.286516366
+Type I IFN,Protein secretion,-0.018729714,0.770981981
+HR-1,Protein secretion,0.122680301,0.055655682
+ATP synthesis,Protein secretion,-0.074926758,0.243605111
+HF-2,Protein secretion,-0.017237027,0.788785335
+Transcription-translatio,Protein secretion,0.103218923,0.107758448
+Granulocyte,Protein secretion,0.149087978,0.019811108
+Streptcoccus,Protein secretion,0.022945819,0.72136764
+MC-3,Protein secretion,0.100978261,0.115659786
+MC-2,Protein secretion,-0.044055701,0.493362286
+Haemophilus,Protein secretion,0.000921356,0.988576173
+MC-1,Protein secretion,0.17457317,0.006258099
+S.pnuemoniae/S. aureus,Protein secretion,0.005287633,0.934510017
+Moraxella,Protein secretion,-0.104970176,0.101883784
+MF-1,Protein secretion,0.037206172,0.562997536
+MF-2,Protein secretion,0.027548582,0.668509775
+Plasma membrane,Protein secretion,0.074368922,0.247142574
+PPV use,NADH,-0.153678875,0.01628331
+Age,NADH,0.049490945,0.441551907
+Sex,NADH,0.05705868,0.374846637
+Race/ethnicity,NADH,0.037780952,0.556977673
+Virus,NADH,0.055514935,0.387926341
+T cell regulation,NADH,0.087867845,0.171268517
+Neutrophil/IL-1 ,NADH,0.015847029,0.805463289
+GPCR,NADH,0.008817683,0.891005507
+Type I IFN,NADH,-0.066619934,0.299994695
+HR-1,NADH,-0.069703151,0.278131383
+ATP synthesis,NADH,-0.004562567,0.943474185
+HF-2,NADH,-0.072330316,0.260373531
+Transcription-translatio,NADH,-0.015642574,0.807924082
+Granulocyte,NADH,0.041529915,0.518496053
+Streptcoccus,NADH,0.21144659,0.000888638
+MC-3,NADH,0.110493571,0.085000791
+MC-2,NADH,0.421754587,6.08E-12
+Haemophilus,NADH,0.168978438,0.008168586
+MC-1,NADH,0.11593706,0.070638241
+S.pnuemoniae/S. aureus,NADH,0.030913133,0.630862072
+Moraxella,NADH,0.114821527,0.073408084
+MF-1,NADH,0.360846613,6.46E-09
+MF-2,NADH,0.243862591,0.000119111
+Plasma membrane,NADH,0.159462531,0.012628649
+Protein secretion,NADH,0.012684828,0.843722837
+PPV use,mRNA metabolism,-0.229717282,0.000296452
+Age,mRNA metabolism,0.213841097,0.000773446
+Sex,mRNA metabolism,0.08711863,0.174962767
+Race/ethnicity,mRNA metabolism,0.016620171,0.796175334
+Virus,mRNA metabolism,0.076578501,0.233338601
+T cell regulation,mRNA metabolism,0.130980674,0.040924658
+Neutrophil/IL-1 ,mRNA metabolism,0.043560545,0.498237872
+GPCR,mRNA metabolism,0.152531298,0.017109382
+Type I IFN,mRNA metabolism,0.123812828,0.053418137
+HR-1,mRNA metabolism,0.108744409,0.090085043
+ATP synthesis,mRNA metabolism,0.050917562,0.428484718
+HF-2,mRNA metabolism,0.110370123,0.085351884
+Transcription-translatio,mRNA metabolism,0.120089712,0.061066663
+Granulocyte,mRNA metabolism,0.007827879,0.903176726
+Streptcoccus,mRNA metabolism,0.032139243,0.617369329
+MC-3,mRNA metabolism,-0.084265267,0.189573858
+MC-2,mRNA metabolism,0.241531707,0.000138947
+Haemophilus,mRNA metabolism,0.246669062,9.87E-05
+MC-1,mRNA metabolism,-0.258540575,4.36E-05
+S.pnuemoniae/S. aureus,mRNA metabolism,-0.16030796,0.012159912
+Moraxella,mRNA metabolism,0.675150449,0
+MF-1,mRNA metabolism,0.257412912,4.72E-05
+MF-2,mRNA metabolism,0.181992017,0.004343628
+Plasma membrane,mRNA metabolism,-0.016022088,0.803357822
+Protein secretion,mRNA metabolism,-0.174640916,0.006237649
+NADH,mRNA metabolism,0.222611658,0.000459163
+PPV use,BCAA metabolism,-0.104785891,0.10248979
+Age,BCAA metabolism,-0.011928777,0.85292847
+Sex,BCAA metabolism,0.105020987,0.101717194
+Race/ethnicity,BCAA metabolism,-0.051984488,0.41885999
+Virus,BCAA metabolism,0.041393229,0.519874707
+T cell regulation,BCAA metabolism,0.029256699,0.649285599
+Neutrophil/IL-1 ,BCAA metabolism,-0.083508097,0.19359698
+GPCR,BCAA metabolism,0.044603984,0.487993337
+Type I IFN,BCAA metabolism,0.011725004,0.855413067
+HR-1,BCAA metabolism,0.125304754,0.050584975
+ATP synthesis,BCAA metabolism,-0.130440519,0.041771541
+HF-2,BCAA metabolism,0.03654807,0.569928119
+Transcription-translatio,BCAA metabolism,0.099681137,0.120436589
+Granulocyte,BCAA metabolism,0.087124377,0.174934208
+Streptcoccus,BCAA metabolism,0.057748855,0.369087669
+MC-3,BCAA metabolism,0.080961026,0.207587359
+MC-2,BCAA metabolism,0.01202146,0.851798876
+Haemophilus,BCAA metabolism,-0.138363208,0.03072573
+MC-1,BCAA metabolism,0.243399752,0.000122825
+S.pnuemoniae/S. aureus,BCAA metabolism,-0.012614371,0.844579838
+Moraxella,BCAA metabolism,-0.053682491,0.403805837
+MF-1,BCAA metabolism,0.060735961,0.344798404
+MF-2,BCAA metabolism,0.030039362,0.640553035
+Plasma membrane,BCAA metabolism,0.21441722,0.000747868
+Protein secretion,BCAA metabolism,0.253210634,6.32E-05
+NADH,BCAA metabolism,0.045566716,0.47864229
+mRNA metabolism,BCAA metabolism,-0.066049615,0.304160388
+PPV use,Oxidative stress response,-0.16473003,0.009949347
+Age,Oxidative stress response,-0.057588697,0.370419168
+Sex,Oxidative stress response,0.065735516,0.306470845
+Race/ethnicity,Oxidative stress response,0.0275476,0.668520888
+Virus,Oxidative stress response,0.00883168,0.890833566
+T cell regulation,Oxidative stress response,0.060310962,0.348191004
+Neutrophil/IL-1 ,Oxidative stress response,0.030755968,0.632600603
+GPCR,Oxidative stress response,0.093677914,0.144567347
+Type I IFN,Oxidative stress response,0.01285377,0.841668653
+HR-1,Oxidative stress response,-0.059883029,0.35162826
+ATP synthesis,Oxidative stress response,-0.0447269,0.486794025
+HF-2,Oxidative stress response,-0.054365255,0.397844489
+Transcription-translatio,Oxidative stress response,-0.018691015,0.771442079
+Granulocyte,Oxidative stress response,0.002357576,0.970774073
+Streptcoccus,Oxidative stress response,0.118954563,0.063570471
+MC-3,Oxidative stress response,0.042542804,0.508338568
+MC-2,Oxidative stress response,0.241357242,0.00014055
+Haemophilus,Oxidative stress response,0.141360905,0.027252093
+MC-1,Oxidative stress response,-0.045264281,0.481569326
+S.pnuemoniae/S. aureus,Oxidative stress response,-0.033614443,0.601304293
+Moraxella,Oxidative stress response,0.032166964,0.617065729
+MF-1,Oxidative stress response,0.162689257,0.010920983
+MF-2,Oxidative stress response,0.229170467,0.000306751
+Plasma membrane,Oxidative stress response,0.001099496,0.986367617
+Protein secretion,Oxidative stress response,-0.026540928,0.679953689
+NADH,Oxidative stress response,0.241601321,0.000138313
+mRNA metabolism,Oxidative stress response,0.204341026,0.001329891
+BCAA metabolism,Oxidative stress response,-0.025665328,0.689957836

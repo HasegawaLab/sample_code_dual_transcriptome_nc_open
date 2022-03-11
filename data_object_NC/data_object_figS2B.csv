@@ -1,0 +1,31 @@
+Goterm,ID,Description,NES,absNES,status,pvalue,pergene,FDR,FDR2
+Tertiary granule (GO:0070820),GO:0070820,Tertiary granule,2.065976817,2.065976817,Up-regulated,1.13E-08,0.450617284,6.14E-06,0.001
+"Proton-transporting two-sector atpase complex, catalytic domain (GO:0033178)",GO:0033178,"Proton-transporting two-sector atpase complex, catalytic domain",1.949812325,1.949812325,Up-regulated,0.000746503,0.470588235,0.020115993,0.02
+Tertiary granule lumen (GO:1904724),GO:1904724,Tertiary granule lumen,1.906872434,1.906872434,Up-regulated,0.0001156,0.462962963,0.005718606,0.006
+Tertiary granule membrane (GO:0070821),GO:0070821,Tertiary granule membrane,1.904431165,1.904431165,Up-regulated,5.06E-05,0.555555556,0.00387897,0.004
+Specific granule (GO:0042581),GO:0042581,Specific granule,1.87755822,1.87755822,Up-regulated,4.40E-06,0.373417722,0.000421615,0.001
+Azurophil granule lumen (GO:0035578),GO:0035578,Azurophil granule lumen,1.792158871,1.792158871,Up-regulated,0.000220482,0.362637363,0.008778621,0.009
+Vacuolar lumen (GO:0005775),GO:0005775,Vacuolar lumen,1.788592107,1.788592107,Up-regulated,1.07E-05,0.354651163,0.000914244,0.001
+Specific granule lumen (GO:0035580),GO:0035580,Specific granule lumen,1.781574533,1.781574533,Up-regulated,0.00030465,0.37704918,0.010607371,0.011
+Specific granule membrane (GO:0035579),GO:0035579,Specific granule membrane,1.776847755,1.776847755,Up-regulated,0.00029749,0.411111111,0.010607371,0.011
+Cytoplasmic vesicle lumen (GO:0060205),GO:0060205,Cytoplasmic vesicle lumen,1.711387499,1.711387499,Up-regulated,9.29E-07,0.33125,0.000174817,0.001
+Secretory granule lumen (GO:0034774),GO:0034774,Secretory granule lumen,1.707293591,1.707293591,Up-regulated,3.86E-06,0.338607595,0.000421615,0.001
+Primary lysosome (GO:0005766),GO:0005766,Primary lysosome,1.701903907,1.701903907,Up-regulated,0.000127405,0.363636364,0.005718606,0.006
+Azurophil granule (GO:0042582),GO:0042582,Azurophil granule,1.701903907,1.701903907,Up-regulated,0.000127405,0.363636364,0.005718606,0.006
+Vesicle lumen (GO:0031983),GO:0031983,Vesicle lumen,1.699985626,1.699985626,Up-regulated,1.14E-06,0.329192547,0.000174817,0.001
+Vacuolar membrane (GO:0005774),GO:0005774,Vacuolar membrane,1.518825381,1.518825381,Up-regulated,7.29E-05,0.361904762,0.00507805,0.005
+Ion channel complex (GO:0034702),GO:0034702,Ion channel complex,1.5075249,1.5075249,Up-regulated,0.000545737,0.304794521,0.016721383,0.017
+Lysosomal membrane (GO:0005765),GO:0005765,Lysosomal membrane,1.495370206,1.495370206,Up-regulated,0.00013438,0.360433604,0.005718606,0.006
+Lytic vacuole membrane (GO:0098852),GO:0098852,Lytic vacuole membrane,1.495370206,1.495370206,Up-regulated,0.00013438,0.360433604,0.005718606,0.006
+External side of plasma membrane (GO:0009897),GO:0009897,External side of plasma membrane,-1.464775479,1.464775479,Down-regulated,0.000229207,0.323170732,0.008778621,0.009
+Organellar ribosome (GO:0000313),GO:0000313,Organellar ribosome,-1.695912395,1.695912395,Down-regulated,0.000787833,0.563218391,0.020115993,0.02
+Mitochondrial ribosome (GO:0005761),GO:0005761,Mitochondrial ribosome,-1.695912395,1.695912395,Down-regulated,0.000787833,0.563218391,0.020115993,0.02
+Catalytic step 2 spliceosome (GO:0071013),GO:0071013,Catalytic step 2 spliceosome,-1.698449299,1.698449299,Down-regulated,0.000544174,0.406976744,0.016721383,0.017
+Small nuclear ribonucleoprotein complex (GO:0030532),GO:0030532,Small nuclear ribonucleoprotein complex,-1.734384045,1.734384045,Down-regulated,0.000700694,0.516129032,0.019878959,0.02
+Spliceosomal snrnp complex (GO:0097525),GO:0097525,Spliceosomal snrnp complex,-1.827446314,1.827446314,Down-regulated,0.000504584,0.464285714,0.016721383,0.017
+Immunological synapse (GO:0001772),GO:0001772,Immunological synapse,-1.86129906,1.86129906,Down-regulated,0.000575571,0.307692308,0.016957207,0.017
+Spliceosomal complex (GO:0005681),GO:0005681,Spliceosomal complex,-1.957454352,1.957454352,Down-regulated,1.60E-08,0.415789474,6.14E-06,0.001
+U2-type spliceosomal complex (GO:0005684),GO:0005684,U2-type spliceosomal complex,-2.052687284,2.052687284,Down-regulated,2.99E-06,0.467391304,0.00038123,0.001
+Hemoglobin complex (GO:0005833),GO:0005833,Hemoglobin complex,-2.090511037,2.090511037,Down-regulated,0.000104332,0.5,0.005718606,0.006
+MHC class II protein complex (GO:0042613),GO:0042613,Mhc class ii protein complex,-2.115891493,2.115891493,Down-regulated,9.90E-05,0.923076923,0.005718606,0.006
+MHC protein complex (GO:0042611),GO:0042611,Mhc protein complex,-2.395578661,2.395578661,Down-regulated,5.00E-07,0.904761905,0.000127602,0.001

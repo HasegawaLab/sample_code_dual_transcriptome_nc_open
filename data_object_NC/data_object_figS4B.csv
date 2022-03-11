@@ -1,0 +1,31 @@
+Goterm,ID,Description,NES,absNES,status,pvalue,pergene,FDR,FDR2
+NADH dehydrogenase complex (GO:0030964),GO:0030964,Nadh dehydrogenase complex,1.639089459,1.639089459,Up-regulated,0.004227564,0.5625,0.083320253,0.083
+Respiratory chain complex I (GO:0045271),GO:0045271,Respiratory chain complex i,1.572894103,1.572894103,Up-regulated,0.015534284,0.533333333,0.083320253,0.083
+Plasma membrane respiratory chain complex I (GO:0045272,GO:0045272,Plasma membrane respiratory chain complex i,1.572894103,1.572894103,Up-regulated,0.015534284,0.533333333,0.083320253,0.083
+Small ribosomal subunit (GO:0015935),GO:0015935,Small ribosomal subunit,1.541049097,1.541049097,Up-regulated,0.011608808,0.434782609,0.083320253,0.083
+Cytosolic small ribosomal subunit (GO:0022627),GO:0022627,Cytosolic small ribosomal subunit,1.541049097,1.541049097,Up-regulated,0.011608808,0.434782609,0.083320253,0.083
+Ribonucleoprotein complex (GO:1990904),GO:1990904,Ribonucleoprotein complex,1.500773946,1.500773946,Up-regulated,0.002756368,0.344827586,0.083320253,0.083
+Plasma membrane respirasome (GO:0070470),GO:0070470,Plasma membrane respirasome,1.480661538,1.480661538,Up-regulated,0.023641299,0.47826087,0.099631189,0.1
+Respirasome (GO:0070469),GO:0070469,Respirasome,1.476944093,1.476944093,Up-regulated,0.018544322,0.461538462,0.084162693,0.084
+Cytosolic ribosome (GO:0022626),GO:0022626,Cytosolic ribosome,1.475270688,1.475270688,Up-regulated,0.005700068,0.345454545,0.083320253,0.083
+Ribosomal subunit (GO:0044391),GO:0044391,Ribosomal subunit,1.475270688,1.475270688,Up-regulated,0.005700068,0.345454545,0.083320253,0.083
+Respiratory chain complex (GO:0098803),GO:0098803,Respiratory chain complex,1.468295155,1.468295155,Up-regulated,0.013385108,0.458333333,0.083320253,0.083
+Ribosome (GO:0005840),GO:0005840,Ribosome,1.415496671,1.415496671,Up-regulated,0.013974296,0.322033898,0.083320253,0.083
+"Transferase complex, transferring phosphorus-containing groups (GO:0061695)",GO:0061695,"Transferase complex, transferring phosphorus-containing groups",1.333570916,1.333570916,Up-regulated,0.107561235,0.2,0.302195852,0.302
+Non-membrane-bounded organelle (GO:0043228),GO:0043228,Non-membrane-bounded organelle,1.325692097,1.325692097,Up-regulated,0.012031366,0.29,0.083320253,0.083
+Periplasmic side of cell outer membrane (GO:0031241),GO:0031241,Periplasmic side of cell outer membrane,1.311989473,1.311989473,Up-regulated,0.119386637,0.333333333,0.320173255,0.32
+Organelle (GO:0043226),GO:0043226,Organelle,1.300814797,1.300814797,Up-regulated,0.017573033,0.284313725,0.084162693,0.084
+Intracellular non-membrane-bounded organelle (GO:0043232),GO:0043232,Intracellular non-membrane-bounded organelle,1.285665025,1.285665025,Up-regulated,0.034965035,0.273809524,0.128933566,0.129
+Bacterial-type flagellum (GO:0009288),GO:0009288,Bacterial-type flagellum,1.2762981,1.2762981,Up-regulated,0.149681529,0.5,0.360719281,0.361
+Intracellular organelle (GO:0043229),GO:0043229,Intracellular organelle,1.258479572,1.258479572,Up-regulated,0.047952048,0.26744186,0.166421813,0.166
+Catalytic complex (GO:1902494),GO:1902494,Catalytic complex,1.249659267,1.249659267,Up-regulated,0.032967033,0.3203125,0.128933566,0.129
+Oxidoreductase complex (GO:1990204),GO:1990204,Oxidoreductase complex,1.237534576,1.237534576,Up-regulated,0.098098098,0.358490566,0.289389389,0.289
+Extrinsic component of plasma membrane (GO:0019897),GO:0019897,Extrinsic component of plasma membrane,1.236432265,1.236432265,Up-regulated,0.195329087,0.375,0.384147205,0.384
+Cytoplasmic side of plasma membrane (GO:0009898),GO:0009898,Cytoplasmic side of plasma membrane,1.213577364,1.213577364,Up-regulated,0.192229039,0.583333333,0.384147205,0.384
+Cytoplasmic side of membrane (GO:0098562),GO:0098562,Cytoplasmic side of membrane,1.213577364,1.213577364,Up-regulated,0.192229039,0.583333333,0.384147205,0.384
+Large ribosomal subunit (GO:0015934),GO:0015934,Large ribosomal subunit,1.208654193,1.208654193,Up-regulated,0.175935288,0.28125,0.384147205,0.384
+Cytosolic large ribosomal subunit (GO:0022625),GO:0022625,Cytosolic large ribosomal subunit,1.208654193,1.208654193,Up-regulated,0.175935288,0.28125,0.384147205,0.384
+Periplasmic space (GO:0042597),GO:0042597,Periplasmic space,1.165735625,1.165735625,Up-regulated,0.094905095,0.340136054,0.289389389,0.289
+Plasma membrane protein complex (GO:0098797),GO:0098797,Plasma membrane protein complex,1.14961201,1.14961201,Up-regulated,0.152847153,0.433333333,0.360719281,0.361
+Membrane protein complex (GO:0098796),GO:0098796,Membrane protein complex,1.134541753,1.134541753,Up-regulated,0.136863137,0.405063291,0.351083699,0.351
+Protein-containing complex (GO:0032991),GO:0032991,Protein-containing complex,1.1054452,1.1054452,Up-regulated,0.087912088,0.28988764,0.288156288,0.288

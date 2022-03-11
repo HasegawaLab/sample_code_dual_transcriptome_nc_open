@@ -1,0 +1,1336 @@
+<phyloxml xmlns="http://www.phyloxml.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
+  <phylogeny rooted="true">
+    <clade>
+      <clade>
+        <name>k__Bacteria</name>
+        <branch_length>1.0</branch_length>
+        <clade>
+          <name>p__Firmicutes</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+          <clade>
+            <name>c__Bacilli</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Lactobacillales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Streptococcaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Streptococcus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Streptococcus_mitis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#EC5C3B</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#F88B51</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.265041341</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Streptococcus mitis</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_pneumoniae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#FDB86A</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#E9ECD7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">4.978605082</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Streptococcus pneumoniae</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_salivarius</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.011467921</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_peroris</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006314187</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_oralis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008630873</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_sanguinis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.01098471</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_agalactiae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.018617158</property>
+                  </clade>
+                  <clade>
+                    <name>s__Streptococcus_thermophilus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.012251434</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Lactococcus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Lactococcus_lactis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005265773</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Carnobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Granulicatella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Granulicatella_elegans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006059006</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Dolosigranulum</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Dolosigranulum_pigrum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005230836</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Lactobacillaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Lactobacillus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Lactobacillus_rhamnosus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.035977655</property>
+                  </clade>
+                  <clade>
+                    <name>s__Lactobacillus_salivarius</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.010684464</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Bacillales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Bacillaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Bacillus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Bacillus_subtilis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005934715</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Unknown</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Gemella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Gemella_haemolysans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.028638836</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Staphylococcaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Staphylococcus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Staphylococcus_epidermidis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#F47346</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#C9E8F1</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.100899305</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Staphylococcus epidermidis</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Staphylococcus_aureus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#EC5C3B</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#FDB86A</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.12166124</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Staphylococcus aureus</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Staphylococcus_warneri</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006679455</property>
+                  </clade>
+                  <clade>
+                    <name>s__Staphylococcus_caprae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.011074986</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>c__Negativicutes</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Veillonellales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Veillonellaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Veillonella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Veillonella_dispar</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00bfff</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#5689BE</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#5689BE</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.156153083</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Veillonella dispar</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Veillonella_atypica</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.041705338</property>
+                  </clade>
+                  <clade>
+                    <name>s__Veillonella_rogosae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.007260174</property>
+                  </clade>
+                  <clade>
+                    <name>s__Veillonella_parvula</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008282699</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>c__Clostridia</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Clostridiales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Lachnospiraceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Lachnoanaerobaculum</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Lachnoanaerobaculum_saburreum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005072236</property>
+                  </clade>
+                  <clade>
+                    <name>s__Lachnoanaerobaculum_umeaense</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.007296929</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>p__Bacteroidetes</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00ff80</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00ff80</property>
+          <clade>
+            <name>c__Bacteroidia</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Bacteroidales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Prevotellaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Prevotella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Prevotella_melaninogenica</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#8EC1DC</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#FDCA7C</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.344955201</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Prevotella melaninogenica</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_histicola</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.022034244</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_salivae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.019487743</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_pallens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.007151477</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_oulorum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.007529355</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_nanceiensis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#A2D2E5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#679EC9</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.252990527</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Prevotella nanceiensis</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_bivia</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.004927948</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_oris</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.004916345</property>
+                  </clade>
+                  <clade>
+                    <name>s__Prevotella_veroralis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.030123642</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Porphyromonadaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Porphyromonas</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Porphyromonas_gingivalis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.0431011</property>
+                  </clade>
+                  <clade>
+                    <name>s__Porphyromonas_pasteri</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#00ff80</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#FDCA7C</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#B6DEEC</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.136407452</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Porphyromonas pasteri</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Porphyromonas_catoniae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.040110526</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>c__Flavobacteriia</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Flavobacteriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Flavobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Capnocytophaga</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Capnocytophaga_sputigena</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.020911956</property>
+                  </clade>
+                  <clade>
+                    <name>s__Capnocytophaga_gingivalis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006401232</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>p__Proteobacteria</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+          <clade>
+            <name>c__Betaproteobacteria</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Neisseriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Neisseriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Neisseria</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Neisseria_meningitidis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.054225105</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_mucosa</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.015284052</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_lactamica</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#FBA35C</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#F4E6B0</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.124034192</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Neisseria lactamica</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_cinerea</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.06633956</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_flavescens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#F47346</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#F4E6B0</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.089109135</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Neisseria flavescens</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_subflava</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008043712</property>
+                  </clade>
+                  <clade>
+                    <name>s__Neisseria_oralis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006017628</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Burkholderiales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Burkholderiaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Ralstonia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Ralstonia_pickettii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.017504397</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Burkholderia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Burkholderia_cepacia</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008045821</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Comamonadaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Delftia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Delftia_acidovorans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.081367398</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Acidovorax</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Acidovorax_temperans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005889578</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Alcaligenaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Achromobacter</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Achromobacter_xylosoxidans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.028230418</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>c__Gammaproteobacteria</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Pseudomonadales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Moraxellaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Moraxella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Moraxella_catarrhalis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#79B1D3</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#8EC1DC</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">3.749758408</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Moraxella catarrhalis</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Moraxella_nonliquefaciens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#4575B4</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#F88B51</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">2.238408443</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Moraxella nonliquefaciens</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Moraxella_lincolnii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#4575B4</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#679EC9</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.236963143</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Moraxella lincolnii</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Moraxella_osloensis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.007871973</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Acinetobacter</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Acinetobacter_johnsonii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008140795</property>
+                  </clade>
+                  <clade>
+                    <name>s__Acinetobacter_junii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.009717219</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Pseudomonadaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Pseudomonas</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Pseudomonas_oleovorans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.011476652</property>
+                  </clade>
+                  <clade>
+                    <name>s__Pseudomonas_fluorescens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.030280777</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Enterobacterales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Enterobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Escherichia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Escherichia_coli</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#D73027</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#E14631</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.93477126</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Escherichia coli</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Enterobacter</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Enterobacter_cancerogenus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006208043</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Klebsiella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Klebsiella_pneumoniae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.032487017</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Yersiniaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Serratia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Serratia_marcescens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.016527195</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Pasteurellales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Pasteurellaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Haemophilus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Haemophilus_haemolyticus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#FDDD8D</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#FDDD8D</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.086614779</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Haemophilus haemolyticus</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Haemophilus_influenzae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#D73027</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#79B1D3</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">1.535226601</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Haemophilus influenzae</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Haemophilus_parainfluenzae</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.06089912</property>
+                  </clade>
+                  <clade>
+                    <name>s__Haemophilus_parahaemolyticus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.028257804</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Aggregatibacter</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Aggregatibacter_actinomycetemcomitans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ffea00</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#A2D2E5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#B6DEEC</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.158828551</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Aggregatibacter actinomycetemcomitans</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Xanthomonadales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Xanthomonadaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Stenotrophomonas</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Stenotrophomonas_maltophilia</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.012059988</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+          <clade>
+            <name>c__Alphaproteobacteria</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Rhizobiales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Bradyrhizobiaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Bradyrhizobium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Bradyrhizobium_elkanii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.012177984</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Rhizobiaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Agrobacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Agrobacterium_tumefaciens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.010859809</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Caulobacterales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Caulobacteraceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Brevundimonas</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Brevundimonas_diminuta</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005221617</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Rhodospirillales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Acetobacteraceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Roseomonas</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Roseomonas_mucosa</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006553283</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>p__Actinobacteria</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#9ACD32</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#9ACD32</property>
+          <clade>
+            <name>c__Actinobacteria</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Micrococcales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Micrococcaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Rothia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Rothia_mucilaginosa</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.04282447</property>
+                  </clade>
+                  <clade>
+                    <name>s__Rothia_dentocariosa</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008864107</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Micrococcus</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Micrococcus_luteus</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.01868314</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Microbacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Microbacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Microbacterium_flavescens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005714915</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Propionibacteriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Propionibacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Cutibacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Cutibacterium_acnes</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_alpha" ref="A:1">0</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#E14631</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#E9ECD7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">1.927297108</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Cutibacterium acnes</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Cutibacterium_granulosum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.026828306</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Pseudopropionibacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Pseudopropionibacterium_propionicum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005415145</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Corynebacteriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Corynebacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Corynebacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Corynebacterium_aurimucosum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006381627</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_tuberculostearicum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#FBA35C</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#DDF1F7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.118899861</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Corynebacterium tuberculostearicum</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_accolens</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.017875095</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_matruchotii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.020098362</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_pseudodiphtheriticum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.062182583</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_amycolatum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.009338213</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_simulans</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#9ACD32</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_font_size" ref="A:1">10</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#DDF1F7</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#C9E8F1</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.780252508</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">5</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation" ref="A:1">Corynebacterium simulans</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="annotation_rotation" ref="A:1">90</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_otitidis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.028213552</property>
+                  </clade>
+                  <clade>
+                    <name>s__Corynebacterium_striatum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.0051701</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Unknown</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Lawsonella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Lawsonella_clevelandensis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.018813822</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Mycobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Mycolicibacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Mycolicibacterium_neoaurum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008753574</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Actinomycetales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Actinomycetaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Schaalia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Schaalia_odontolytica</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.009867108</property>
+                  </clade>
+                </clade>
+                <clade>
+                  <name>g__Actinomyces</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Actinomyces_naeslundii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.006528518</property>
+                  </clade>
+                  <clade>
+                    <name>s__Actinomyces_johnsonii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.009559853</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+            <clade>
+              <name>o__Bifidobacteriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Bifidobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Gardnerella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Gardnerella_vaginalis</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.01776324</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>p__Fusobacteria</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#ff3333</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#ff3333</property>
+          <clade>
+            <name>c__Fusobacteriia</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Fusobacteriales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Fusobacteriaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Fusobacterium</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Fusobacterium_periodonticum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.021035257</property>
+                  </clade>
+                  <clade>
+                    <name>s__Fusobacterium_nucleatum</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.02382104</property>
+                  </clade>
+                </clade>
+              </clade>
+              <clade>
+                <name>f__Leptotrichiaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Leptotrichia</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Leptotrichia_wadei</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.015805904</property>
+                  </clade>
+                  <clade>
+                    <name>s__Leptotrichia_goodfellowii</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.008686091</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+        <clade>
+          <name>p__Synergistetes</name>
+          <branch_length>1.0</branch_length>
+          <property applies_to="clade" datatype="xsd:string" id_ref="annotation_background_color" ref="A:1">#2d19ff</property>
+          <property applies_to="clade" datatype="xsd:string" id_ref="clade_marker_color" ref="A:1">#2d19ff</property>
+          <clade>
+            <name>c__Synergistia</name>
+            <branch_length>1.0</branch_length>
+            <clade>
+              <name>o__Synergistales</name>
+              <branch_length>1.0</branch_length>
+              <clade>
+                <name>f__Synergistaceae</name>
+                <branch_length>1.0</branch_length>
+                <clade>
+                  <name>g__Jonquetella</name>
+                  <branch_length>1.0</branch_length>
+                  <clade>
+                    <name>s__Jonquetella_anthropi</name>
+                    <branch_length>1.0</branch_length>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#A8A8A8</property>
+                    <property applies_to="clade" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">0.005542865</property>
+                  </clade>
+                </clade>
+              </clade>
+            </clade>
+          </clade>
+        </clade>
+      </clade>
+    </clade>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_color" ref="A:1">#000000</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_color" ref="A:1">#000000</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_color" ref="A:1">#000000</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="class_legend_marker_size" ref="A:1">1.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_separation" ref="A:1">-0.9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_separator_color" ref="A:1">#888888</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_separator_color" ref="A:1">#888888</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_separator_color" ref="A:1">#888888</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_label_color" ref="A:1">#0000FF</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_label_color" ref="A:1">#0000FF</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_bracket_width" ref="A:1">0.2</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_legend_font_size" ref="A:1">10</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_alpha" ref="A:1">0.2</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="start_rotation" ref="A:1">90</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_bracket_depth" ref="A:1">0.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="total_plotted_degrees" ref="A:1">340</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="clade_marker_size" ref="A:1">16</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_internal_separator_thickness" ref="A:1">0.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_internal_separator_thickness" ref="A:1">0.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_internal_separator_thickness" ref="A:1">0.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_offset" ref="A:1">0.01</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_label" ref="A:1">Intensive care use</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_label" ref="A:1">PPV use</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="class_legend_font_size" ref="A:1">10</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_label_font_size" ref="A:1">9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_label_font_size" ref="A:1">9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_label_font_size" ref="A:1">9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__4__ring_label_font_size" ref="A:1">9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__5__ring_label_font_size" ref="A:1">9</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="clade_separation" ref="A:1">0.5</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="branch_color_from_ancestor" ref="A:1">1</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_alpha" ref="A:1">1.0</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_alpha" ref="A:1">1.0</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="annotation_background_width" ref="A:1">1</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__1__ring_height" ref="A:1">2</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__2__ring_height" ref="A:1">2</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ext__3__ring_height" ref="A:1">-1.0</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_keys" ref="A:1">Actinobacteria_._._Bacteroidetes_._._Firmicutes_._._Fusobacteria_._._Proteobacteria_._._Synergistetes</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_annotation_background_color" ref="A:1">._._._._._._._._._._._._._._._.</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_annotation_background_edge_color" ref="A:1">._._._._._._._._._._._._._._._.</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_clade_marker_color" ref="A:1">#9ACD32_._._#00ff80_._._#00bfff_._._#ff3333_._._#ffea00_._._#2d19ff</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_clade_marker_edge_width" ref="A:1">._._._._._._._._._._._._._._._.</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_clade_marker_size" ref="A:1">._._._._._._._._._._._._._._._.</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="leg_clade_marker_shape" ref="A:1">._._._._._._._._._._._._._._._.</property>
+    <property applies_to="phylogeny" datatype="xsd:string" id_ref="ignore_branch_len" ref="A:1">1</property>
+  </phylogeny>
+</phyloxml>
