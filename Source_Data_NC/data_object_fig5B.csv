@@ -1,0 +1,16 @@
+Module,OR,lowCI,upCI,specimen,Coef,absCoef,col
+T cell regulation module,0.24,0.11,0.53,HF,-1.421999129,1.421999129,0
+Neutrophi/IL-1 module,3.94,1.7,10.06,HF,1.371604973,1.371604973,1
+GPCR module,0.38,0.15,0.78,HF,-0.961422934,0.961422934,0
+Type I IFN module,0.37,0.14,0.75,HF,-0.986306354,0.986306354,0
+HF-1 module,0.43,0.17,0.98,HF,-0.835930988,0.835930988,0
+S. pneumoniae/S. aureus module,2.55,1.18,5.78,MT,0.9369734,0.9369734,1
+MC-1 module,1.7,0.75,3.82,MT,0.530263364,0.530263364,1
+Moraxella module,0.61,0.24,1.46,MT,-0.49532631,0.49532631,0
+Streptcoccus module,1.73,0.69,4.27,MT,0.546954909,0.546954909,1
+Haemophilus module,1.43,0.6,3.66,MT,0.355680433,0.355680433,1
+mRNA metabolism module,0.3,0.16,0.5,MF,-1.201317871,1.201317871,0
+Plasma membrane module,0.35,0.2,0.64,MF,-1.040162117,1.040162117,0
+BCAA metabolism module,0.73,0.05,0.88,MF,-0.314799713,0.314799713,0
+Oxidative stress response module,0.57,0.07,0.78,MF,-0.566541309,0.566541309,0
+NADH dehydrogenase module,0.59,0.06,0.8,MF,-0.535948589,0.535948589,0
