@@ -1,0 +1,1889 @@
+---
+title: "Integrated relationship of nasopharyngeal airway host response and microbiome"
+  with bronchiolitis severity :dual-transcriptomic profiling
+author: Michimasa Fujiogi; Yoshihiko Raita; Marcos Pérez-Losada; Robert J. Freishtat,;
+  Juan C. Celedón; Jonathan M. Mansbach; Pedro A. Piedra; Zhaozhong Zhu; Carlos A.
+  Camargo, Jr.; and Kohei Hasegawa
+date: "3/12/2022"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+####################### 
+I. SET UP 
+####################### 
+```{r setup, include=FALSE}
+# Load packages -----------------------------------------------------------
+library("tidyverse")
+library("rlang")
+library("openxlsx")
+library("readxl")
+library("tableone")
+library("dplyr")
+library("WGCNA")
+library("igraph")
+
+options(stringsAsFactors = FALSE);
+
+# Create df function
+createdf = function( nrow, ncol, colnames = c() ){
+  data.frame( matrix( vector(), nrow, ncol, dimnames = list( c(), colnames ) ) )
+}
+
+
+# Function: get best result1 
+get_best_result = function(sft) {
+  best = which(sft$fitIndices$SFT.R.sq == max(sft$fitIndices$SFT.R.sq))
+  best_result = sft$fitIndices$SFT.R.sq[best]
+  print (c(best, best_result))
+}
+
+# Function: get best result2
+get_best_result2 = function(caret_fit) {
+  best = which(rownames(caret_fit$results) == rownames(caret_fit$bestTune))
+  best_result = caret_fit$results[best, ]
+  rownames(best_result) = NULL
+  best_result
+}
+```
+
+
+
+STEP A) Examine associations of each omics data element with the risk of PPV use at the individual data level. 
+# Host response
+```{r}
+# Import data
+txi <- readRDS("hostsresponsedata.rds", refhook = NULL)
+df_clinicaldata <- read.csv("metadata.csv", header=TRUE) #clinical dataset
+
+ddsTxi <- DESeqDataSetFromTximport(txi,
+                                   colData = df_clinicaldata,
+                                   design = ~ PPVuse)
+# Minimal pre-filtering (keep only rows that have at least 10 reads total) 
+keep <- rowSums(counts(ddsTxi)) >= 10
+ddsTxi <- ddsTxi[keep,]
+
+# Differential expression analysis
+ddsTxi <- DESeq(ddsTxi, parallel=F)
+res <- results(ddsTxi)
+
+# Data object for fig2A
+write.csv(res,"data_object_fig2A.csv")
+
+# Pathway analysis
+library(clusterProfiler)
+library(org.Hs.eg.db)
+res <- results(ddsTxi)
+all.genes <- rownames(res)
+all.genes.entrez <- bitr(all.genes, fromType="ENSEMBL", toType="ENTREZID", OrgDb="org.Hs.eg.db")
+original_gene_list <- res$stat
+# name the vector
+names(original_gene_list) <- rownames(res)
+original_gene_list_df <- as.data.frame(original_gene_list)
+original_gene_list_df <- data.frame(rownames(original_gene_list_df), original_gene_list_df$original_gene_list)
+host_list <- left_join(original_gene_list_df, all.genes.entrez, by = c("rownames" = "ENSEMBL"))
+host_list = sort(host_list, decreasing = T)
+
+
+gse_result <- gseGO(geneList     = host_list, 
+                    OrgDb        = org.Hs.eg.db,
+                    ont          = c("BP","CC","MF"),
+                    maxGSSize = 500, 
+                    pAdjustMethod = "fdr", 
+                    verbose = TRUE, 
+                    by = "fgsea"
+                    )
+
+#Make data_object
+#Biological process
+"data_object_fig2B.csv"
+#Molecular process
+"data_object_figS2A.csv"
+#Cellular component
+"data_object_figS2B.csv"
+
+# For WGCNA
+resSig <- subset(res, padj < 0.4)
+resSig <- as.data.frame(resSig)
+host_04 <- rownames(resSig)
+df_host_vstdata <- vst(ddsTxi, blind=FALSE)
+df_host_vstdata  <- as.data.frame(t(assay(df_host_vstdata)))
+df_host  <- df_host_vstdata %>% dplyr::select(all_of(host_04))
+```
+
+# Microbial composition
+# Bacteria
+```{r}
+library(phyloseq)
+# Import data
+# Bacteria 
+ps <- read.csv("compositiondata.csv", header=TRUE)
+colnames(tax_table(ps)) <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species", "Strain")
+#
+sample_data(ps) <- df_clinicaldata #clinical dataset
+#Filter by other taxa with not correspondence to analysis 
+filterPhyla2 <- c("k__Eukaryota", "k__Chloroplast", "k__Mitochondria")
+ps1 <- subset_taxa(ps1, !Kingdom %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Phylum %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Class %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Order %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Family %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Genus %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Species %in% filterPhyla2)
+ps1 <- subset_taxa(ps1, !Strain %in% filterPhyla2)
+ps1
+
+# Remove OTUs whose mean value per sample is less than 1
+ps2 <- filter_taxa(ps1, function(x) mean(x) > 1, TRUE)
+# Remove taxa that are not observed more than X times in at least 10% of the samples
+ps3 <- filter_taxa(ps2, function(x) sum(x > 2) > (0.1*length(x)), TRUE)
+# And finally filter samples with less than 1000 reads
+ps4 = prune_samples(sample_sums(ps3) >= 1000, ps3)
+ps_bacteria <- subset_taxa(ps4, Kingdom=="Bacteria")
+ps_Species <- phyloseq::tax_glom(ps_bacteria, "Species")
+# Convert to relative abundance
+ps_rel_abund = phyloseq::transform_sample_counts(ps_Species, function(x){x / sum(x)})
+
+ps_spe_top10 <- get_top_taxa(physeq_obj = ps_rel_abund, n = 10, relative = TRUE,
+                           discard_other = T, other_label = "Other")
+
+# Data object for fig3
+write.csv(ps_spe_top10, "data_object_fig3B.csv")
+
+
+
+# Poisson regression 
+ps_spe <- get_top_taxa(physeq_obj = ps_Species , n = 320, relative = TRUE,
+                           discard_other = T, other_label = "Other")
+df_composition <- data.frame(t(data.frame(phyloseq::otu_table(ps_spe))))
+
+ncol <- 320
+table_spe_po <- createdf(ncol,4, colnames = c( "Variable", "p.value", "FDR"))
+
+for (i in 1:ncol) {
+  table_spe_po [i,1] <- names(df_composition )[i] #Variable Name
+  result1 <-  glm(df_composition[,i] ~ PPVuse , family = poisson, data=df_composition )
+  result2 <- summ(result1, exp = T )
+  table_spe_po[i,2] <-  result2$coeftable[2,5] #Pvalue
+}
+
+
+# FDR
+for( i in 1:ncol){
+ BH <- p.adjust(table_spe_po$p.value, method="fdr")
+ table_spe_po[i,3] <- round(BH[i],digits = 3)
+}
+table_spe_po_fdr04 <- table_spe_po  %>% filter(FDR < 0.4)
+mbtx_po04 <- table_spe_po2_fdr04$Variable
+
+# For WGCNA
+df_composition <- as.data.frame(ps_Species) %>% filter(rowname %in% c(mbtx_po04))
+```
+
+# Fungus
+```{r}
+library(phyloseq)
+# Import data
+# Bacteria 
+ps <- read.csv("compositiondata_fungus.csv", header=TRUE)
+#
+sample_data(ps) <- df_clinicaldata #clinical dataset
+ps1 <- ps
+# Remove OTUs whose mean value per sample is less than 1
+ps2 <- filter_taxa(ps1, function(x) mean(x) > 1, TRUE)
+# Remove taxa that are not observed more than X times in at least 10% of the samples
+ps3 <- filter_taxa(ps2, function(x) sum(x > 2) > (0.1*length(x)), TRUE)
+# And finally filter samples with less than 1000 reads
+ps4 = prune_samples(sample_sums(ps3) >= 1000, ps3)
+ps_fungi <- subset_taxa(ps4, Kingdom=="k__Eukaryota")
+ps_Species <- phyloseq::tax_glom(ps_fungi, "Species")
+phyloseq::taxa_names(ps_Species) <- phyloseq::tax_table(ps_Species)[, "Species"]
+
+# Convert to relative abundance
+ps_rel_abund = phyloseq::transform_sample_counts(ps_Species, function(x){x / sum(x)})
+ps_spe_top10 <- get_top_taxa(physeq_obj = ps_rel_abund, n = 10, relative = TRUE,
+                           discard_other = T, other_label = "Other")
+
+# Data object for fig3
+write.csv(ps_spe_top10, "data_object_figS3.csv")
+
+
+
+# Poisson regression 
+ps_spe <- get_top_taxa(physeq_obj = ps_Species , n = 320, relative = TRUE,
+                           discard_other = T, other_label = "Other")
+df_composition <- data.frame(t(data.frame(phyloseq::otu_table(ps_spe))))
+
+ncol <- 320
+table_spe_po <- createdf(ncol,4, colnames = c( "Variable", "p.value", "FDR"))
+
+for (i in 1:ncol) {
+  table_spe_po [i,1] <- names(df_composition )[i] #Variable Name
+  result1 <-  glm(df_composition[,i] ~ PPVuse , family = poisson, data=df_composition )
+  result2 <- summ(result1, exp = T )
+  table_spe_po[i,2] <-  result2$coeftable[2,5] #Pvalue
+}
+
+
+# FDR
+for( i in 1:ncol){
+ BH <- p.adjust(table_spe_po$p.value, method="fdr")
+ table_spe_po[i,3] <- round(BH[i],digits = 3)
+}
+table_spe_po_fdr04 <- table_spe_po  %>% filter(FDR < 0.4)
+mbtx_po04 <- table_spe_po2_fdr04$Variable
+
+# For WGCNA
+df_composition <- as.data.frame(ps_Species) %>% filter(rowname %in% c(mbtx_po04))
+```
+
+# Microbial function
+```{r}
+df_function_pre <-  read.csv("functiondata.csv", header=TRUE)
+
+df_function_pre <- df_function_pre  %>% left_join(df_clinicaldata ,  by="Sample_ID")
+
+# Place holder
+result_func <-data.frame(name = factor(), pval=double(), stat=double(), FC =double(), log2FC=double())
+
+
+ncol <- ncol(df_function_pre)
+for (i in names(df_function_pre)[c(3:ncol)]) {
+       model=t.test(df_function_pre[[i]] ~ PPVuse, 
+                     data =df_function_pre)
+       FC <- (model$estimate[2]/model$estimate[1]) #base=no PPV use
+       logFC <- log(model$estimate[2]/model$estimate[1],2)
+       t <-data.frame(name=i, pval=model$p.value, stat =model$statistic, FC=FC, log2FC=logFC)
+       result_func <- rbind(result_func,t)
+}
+
+ result_func $pval2<-format.pval(result_func$pval, eps = .00000001, digits = 10)
+ result_func$p_adjust<-  result_func$pval%>%p.adjust(., method="fdr") %>% round(., digits=10)
+ result_func$p_adjust <- as.numeric(result_func$p_adjust)
+ result_func <- result_func[order(result_func$p_adjust),]
+ result_func$p_adjust2 <- format.pval(result_func$p_adjust, eps = .001, digits = 2)
+
+# Data object for fig
+write.csv(result_func, "data_object_fig4A.csv")
+
+# For WGCNA
+result_func <- result_func %>% filter(result_func$p_adjust < 0.4)
+ttest_func_list <- result_func$name
+# Microbial function data (VarianceStabilizingTransformation)
+ddsTxi <- DESeqDataSetFromMatrix(round(df_function_pre),
+                                 colData = df_clinicaldata,
+                                 design = ~ PPVuse
+                                 )
+vst <- DESeq2::varianceStabilizingTransformation(ddsTxi, blind = FALSE) # vst function will perform variance stabilizing transformation
+head(assay(vst), 3)
+df_MF__vst <- assay(vst)
+df_function <- df_MF_vst %>% dplyr::select(all_of(ttest_func_list))
+
+# Pathway analysis
+result_func$ENTREZID = mapIds(org.EcK12.eg.db,
+                    keys=  result_func$name ,
+                    column="ENTREZID",
+                    keytype ="SYMBOL",
+                    multiVals="first")
+
+## Step 1: numeric vector
+function_list <- result_func[,2]
+## Step 2: named vector
+names(function_list) = as.character(result_func[,1])
+## Step 3: decreasing order
+function_list = sort(function_list_list, decreasing = TRUE)
+
+gse_result_function <- clusterProfiler::gseGO(geneList = function_list,  
+                       OrgDb        = org.EcK12.eg.db,
+                       ont          = c("BP","CC","MF"),
+                       maxGSSize = 500, 
+                       pAdjustMethod = "fdr", 
+                       verbose = TRUE, 
+                       by = "fgsea"
+                       )
+
+#Make data_object
+#Biological process
+"data_object_fig4B.csv"
+#Molecular process
+"data_object_figS4A.csv"
+#Cellular component
+"data_object_figS4B.csv"
+```
+
+
+
+STEP B) Reduce the dimensions of the host response, microbial composition, and microbial function data for the subsequent integrated analyses.
+
+# Host response
+```{r}
+# dataset = df_host
+# Remove low variance 
+std_dataset <- apply(df_host, 2, sd)
+sd <- quantile(std_dataset , na.rm= T, c(0, 0.1, 0.5, 1))
+index_low_std <- std_dataset  < sd[2]
+# Subset by sd index
+df_host <- df_host[, index_low_std==FALSE]
+
+# WGCNA
+# Choose a set of soft thresholding powers
+powers=c(1:15) 
+# Choose power based on SFT criterion
+sft=pickSoftThreshold(df.host, powerVector=powers, networkType = "signed hybrid")  
+(bestpower <- get_best_result(sft))
+
+# PickSoftThreshold for calculating scale free topology fitting indices R^2 corresponding to different soft thresholding powers beta.
+power.host <- bestpower[1]
+# Defining a weighted gene co-expression network
+ADJ1=abs(WGCNA::cor(df.host, use="p"))^power.host
+k =softConnectivity(datE=df.host,power=power.host) # Preserve as data for visualization ("data_object_figS9_HR.csv")
+# Plot a histogram of k and a scale free topology plot
+par(mfrow = c(1, 2))
+hist(k, breaks = 50)
+scaleFreePlot(k)
+
+#WGCNA
+net.host <- blockwiseModules(df.host,
+                       corType="bicor", 
+                       networkType="signed hybrid",
+                       replaceMissingAdjacencies = FALSE,
+                       power = power.host,
+                       maxBlockSize= 300,
+                       minModuleSize= 40,
+                       deepSplit = 4,
+                       detectCutHeight = 0.99999,
+                       mergeCutHeight = 0.1,
+                       numericLabels=TRUE,
+                       reassignThreshold = 0.1,
+                       saveTOMs=TRUE,
+                       pamStage=TRUE,
+                       pamRespectsDendro= T, 
+                       saveTOMFileBase="TOM",
+                       cosineCorrelation = FALSE,
+                       weights.x = NULL, 
+                       weights.y = NULL,
+                       randomSeed = 1
+                       )
+moduleLabelsAutomatic=net.host$colors
+
+# Convert labels to colors for plotting
+table(moduleLabelsAutomatic)
+moduleColorsAutomatic.host = labels2colors(moduleLabelsAutomatic,zeroIsGrey = T, colorSeq = c("turquoise","yellow","blue","magenta","black","red","brown","green","pink") )
+
+# Plot the dendrogram and the module colors underneath
+plotDendroAndColors(net.host$dendrograms[[blocknumber]],
+                    colors=datColors,
+                    groupLabels=c("Module colors"),
+                    dendroLabels=FALSE,
+                    hang=0.03, 
+                    addGuide=TRUE,
+                    guideHang=0.05)
+
+(table(moduleColorsAutomatic.host) %>% as.data.frame())
+
+# Calculate eigengenes
+MEList=moduleEigengenes(df.host,colors=colors)
+MEs.host = MEList$eigengenes
+MEs.host.ori = MEs.host  
+# Remove "grey" module
+MEs.host <- MEs.host.ori  %>% dplyr::select(-"MEgrey")
+
+# Choose a module assignment
+moduleColors= moduleColorsAutomatic.host #dynamicColors
+# Define numbers of samples
+nSamples = nrow(df.trait) #PPVuse
+# Recalculate MEs with color labels
+MEs0 = moduleEigengenes(df.host, moduleColors)$eigengenes #moduleColors
+MEs.ori = orderMEs(MEs0) 
+# Remove "grey" module
+MEs <- MEs.ori %>% dplyr::select(-"MEgrey")
+modTraitCor = cor(MEs, df.trait, use = "pairwise.complete.obs", method="spearman") #spearman
+modTraitP = corPvalueStudent(modTraitCor, nSamples)
+
+
+# Extract all gene name from all modules
+#Preparation#################################
+modNames = substring(names(MEs.ori), 3)
+colname <- paste0("",modNames)
+N <- max(table(module_df$moduleLabelsAutomatic))
+Module <- length(names(MEs.ori))
+outcome_eigen <- createdf( N, Module, colnames = c( colname ) )
+modulelist <- paste0("",modNames)
+alltrait <- "PPVuse"
+#############################################
+  
+for (iii in alltrait) {
+  xx <- as.data.frame(df.trait[,iii])
+  names(xx) = iii
+  geneTraitSignificance = as.data.frame(cor(df.host, xx, use = "p"));
+  GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples));
+  names(geneTraitSignificance) = paste("GS.", names(xx), sep="");
+  names(GSPvalue) = paste("p.GS.", names(xx), sep="");
+  namegs <- paste0(names(geneTraitSignificance) )
+for (i in modulelist) {
+ column = match(i, modNames);
+ moduleGenes = moduleColors==i;
+ MM <- paste0("MM",i)
+# geneModuleMembership
+ df1<- geneModuleMembership
+ df2 = df1 %>% rownames_to_column(., "name")  #rownames_to_column()  add_rownames
+ df3<- df2[moduleGenes, c(1,column+1)] %>% as.data.frame()
+ df4 = df3 %>% filter(abs(df3$MM) > 0.0)
+ df5 <- df4$name %>% as.data.frame()
+ MM.p<- paste0(df4$name)
+ # metabolite significance
+ df6<- geneTraitSignificance
+ df7 = df6 %>% rownames_to_column(., "name") 
+ df8<- df7[moduleGenes, 1:2] %>% as.data.frame()
+ df9 = df8 %>% filter(abs(df8[,2]) > 0.0)
+ df10 <- df9$name %>% as.data.frame()
+ MM.s<- paste0(df9$name)
+ # inner-merge
+ eigenm <- inner_join(df5, df10, by= ".") 
+ # put in outcome table
+ for (ii in 1:N) {
+   outcome_eigen[ii,i] <- paste0(eigenm$.)[ii]
+ }
+write.csv(outcome_eigen, paste0("df_transcriptome_in_allmodule.csv"))
+}} 
+
+#Top5
+df_modTraitCor<- as.data.frame(modTraitCor)
+top <- arrange(df_modTraitCor, desc(abs(df_modTraitCor$PPVuse)))
+temp_head5  <- head(top,5)
+top5 <- paste0(rownames(temp_head5) ,"" )
+# Subset by top5
+eigenvalue_host.top5 <- dplyr::select(MEs.host, c(Sample_ID, all_of(top5)))
+```
+
+# Microbial composition
+```{r}
+# Dataset = df_composition
+# Remove low variance 
+std_dataset <- apply(df_composition, 2, sd)
+sd <- quantile(std_dataset , na.rm= T, c(0, 0.1, 0.5, 1))
+index_low_std <- std_dataset  < sd[2]
+# Subset by sd index
+df_composition <- df_composition[, index_low_std==FALSE]
+
+# WGCNA
+# Choose a set of soft thresholding powers
+powers=c(1:15) # in practice this should include powers up to 20.
+# Choose power based on SFT criterion
+sft=pickSoftThreshold(df_composition, powerVector=powers, networkType = "signed hybrid")
+(bestpower <- get_best_result(sft))
+# PickSoftThreshold for calculating scale free topology fitting indices R^2 corresponding to different soft thresholding powers beta.
+power.composition <- bestpower[1]
+# Defining a weighted gene co-expression network
+ADJ1=abs(WGCNA::cor(df_composition, use="p"))^power.composition
+k=softConnectivity(datE=df_composition, power=power.composition) # Preserve as data for visualization ("data_object_figS9_MC.csv")
+# Plot a histogram of k and a scale free topology plot
+par(mfrow = c(1, 2))
+hist(k, breaks = 50)
+scaleFreePlot(k)
+
+#WGCNA
+net.composition <- blockwiseModules(df_composition,
+                       corType="bicor", 
+                       networkType="signed hybrid", 
+                       replaceMissingAdjacencies = F,
+                       power=power.mbtx,
+                       minModuleSize= 3,
+                       maxBlockSize= 40,
+                       deepSplit = 4,
+                       detectCutHeight = 0.99999, 
+                       mergeCutHeight= 0.42, 
+                       numericLabels=TRUE,
+                       reassignThreshold = 0.1,
+                       saveTOMs=TRUE,
+                       pamStage=TRUE, 
+                       pamRespectsDendro=TRUE, 
+                       saveTOMFileBase="TOM",
+                       cosineCorrelation = FALSE,
+                       weights.x = NULL, 
+                       weights.y = NULL,
+                       randomSeed = 1
+                       )
+moduleLabelsAutomatic=net.composition$colors
+# Convert labels to colors for plotting
+table(moduleLabelsAutomatic)
+# Convert labels to colors for plotting
+moduleColorsAutomatic.composition = labels2colors(moduleLabelsAutomatic, zeroIsGrey = T, colorSeq = c("darkorchid","darkgreen", "darkblue","darkorange","darkred","darkturquoise","darkcyan") )
+
+# Plot the dendrogram and the module colors underneath
+plotDendroAndColors(net.composition$dendrograms[[blocknumber]],
+                    colors=datColors,
+                    groupLabels=c("Module colors"),
+                    dendroLabels=FALSE,
+                    hang=0.03, 
+                    addGuide=TRUE,
+                    guideHang=0.05)
+
+(table(moduleColorsAutomatic.composition) %>% as.data.frame())
+
+# Calculate eigengenes
+MEList=moduleEigengenes(df.host,colors=colors)
+MEs.composition = MEList$eigengenes
+MEs.composition.ori = MEs.composition  
+# Remove "grey" module
+MEs.composition <- MEs.composition.ori  %>% dplyr::select(-"MEgrey")
+
+# Choose a module assignment
+moduleColors= moduleColorsAutomatic.composition
+# Define numbers of samples
+nSamples = nrow(df.trait) #PPVuse
+# Recalculate MEs with color labels
+MEs0 = moduleEigengenes(df_composition, moduleColors)$eigengenes #moduleColors
+MEs.ori = orderMEs(MEs0) 
+# remove "grey" module
+MEs <- MEs.ori %>% dplyr::select(-"MEgrey")
+modTraitCor = cor(MEs, df.trait, use = "pairwise.complete.obs", method="spearman") #spearman
+modTraitP = corPvalueStudent(modTraitCor, nSamples)
+
+
+#Extract all gene name from all modules
+Preparation#################################
+modNames = substring(names(MEs.ori), 3)
+colname <- paste0("",modNames)
+N <- max(table(module_df$moduleLabelsAutomatic))
+Module <- length(names(MEs.ori))
+outcome_eigen <- createdf( N, Module, colnames = c( colname ) )
+modulelist <- paste0("",modNames)
+alltrait <- "PPVuse"
+#############################################
+  
+for (iii in alltrait) {
+  xx <- as.data.frame(df.trait[,iii])
+  names(xx) = iii
+  geneTraitSignificance = as.data.frame(cor(df.host, xx, use = "p"));
+  GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples));
+  names(geneTraitSignificance) = paste("GS.", names(xx), sep="");
+  names(GSPvalue) = paste("p.GS.", names(xx), sep="");
+  namegs <- paste0(names(geneTraitSignificance) )
+for (i in modulelist) {
+ column = match(i, modNames);
+ moduleGenes = moduleColors==i;
+ MM <- paste0("MM",i)
+ df1<- geneModuleMembership
+ df2 = df1 %>% rownames_to_column(., "name")  
+ df3<- df2[moduleGenes, c(1,column+1)] %>% as.data.frame()
+ df4 = df3 %>% filter(abs(df3$MM) > 0.0)
+ df5 <- df4$name %>% as.data.frame()
+ MM.p<- paste0(df4$name)
+ df6<- geneTraitSignificance
+ df7 = df6 %>% rownames_to_column(., "name") 
+ df8<- df7[moduleGenes, 1:2] %>% as.data.frame()
+ df9 = df8 %>% filter(abs(df8[,2]) > 0.0)
+ df10 <- df9$name %>% as.data.frame()
+ MM.s<- paste0(df9$name)
+ #inner-merge
+ eigenm <- inner_join(df5, df10, by= ".") 
+ for (ii in 1:N) {
+   outcome_eigen[ii,i] <- paste0(eigenm$.)[ii]
+ }
+write.csv(outcome_eigen, paste0("df_composition_in_allmodule.csv"))
+}} 
+
+
+
+#Top5
+df_modTraitCor<- as.data.frame(modTraitCor)
+top <- arrange(df_modTraitCor, desc(abs(df_modTraitCor$PPVuse)))
+temp_head5  <- head(top,5)
+top5 <- paste0(rownames(temp_head5) ,"" )
+# Subset by top5
+eigenvalue_composition.top5 <- dplyr::select(MEs.composition, c(Sample_ID, all_of(top5)))
+```
+
+# Microbial function
+```{r}
+# Remove low variance 
+std_dataset <- apply(df_function, 2, sd)
+sd <- quantile(std_dataset , na.rm= T, c(0, 0.1, 0.5, 1))
+index_low_std <- std_dataset  < sd[2]
+# Subset by sd index
+df_function <- df_function[, index_low_std==FALSE]
+
+# WGCNA
+# Choose a set of soft thresholding powers
+powers=c(1:15) 
+# Choose power based on SFT criterion
+sft=pickSoftThreshold(df.function, powerVector=powers, networkType = "signed hybrid")  #"unsigned", "signed", "signed hybrid"
+(bestpower <- get_best_result(sft))
+
+# PickSoftThreshold for calculating scale free topology fitting indices R^2 corresponding to different soft thresholding powers beta.
+power.function <- bestpower[1]
+# Defining a weighted gene co-expression network
+ADJ1=abs(WGCNA::cor(df.function, use="p"))^power.function
+k=softConnectivity(datE=df.function,power=power.function) # Preserve as data for visualization ("data_object_figS9_MF.csv")
+# Plot a histogram of k and a scale free topology plot
+par(mfrow = c(1, 2))
+hist(k, breaks = 50)
+scaleFreePlot(k)
+
+#WGCNA
+net.function <- WGCNA::blockwiseModules(df.function,
+                       corType="bicor", 
+                       networkType="signed hybrid", 
+                       replaceMissingAdjacencies = FALSE,
+                       power=power.function,
+                       maxBlockSize= 500, 
+                       minModuleSize = 5,
+                       deepSplit = 4,
+                       detectCutHeight = 0.99999,
+                       mergeCutHeight = 0.92, 
+                       numericLabels=TRUE,
+                       reassignThreshold = 0.25, 
+                       saveTOMs=TRUE,
+                       pamStage=TRUE,
+                       pamRespectsDendro=TRUE, 
+                       saveTOMFileBase="TOM",
+                       cosineCorrelation = FALSE,
+                       weights.x = NULL, 
+                       weights.y = NULL,
+                       randomSeed = 1, 
+                       )
+moduleLabelsAutomatic=net.function$colors
+# Convert labels to colors for plotting
+table(moduleLabelsAutomatic)
+  moduleColorsAutomatic.function = labels2colors(moduleLabelsAutomatic,zeroIsGrey = T, colorSeq = c("lightcyan3","plum2","goldenrod","khaki","royalblue","mediumpurple","lightgreen","salmon", "violetred", "darkseagreen", "maroon2" ))
+
+# Plot the dendrogram and the module colors underneath
+plotDendroAndColors(net.function$dendrograms[[blocknumber]],
+                    colors=datColors,
+                    groupLabels=c("Module colors"),
+                    dendroLabels=FALSE,
+                    hang=0.03, 
+                    addGuide=TRUE,
+                    guideHang=0.05)
+
+(table(moduleColorsAutomatic.function) %>% as.data.frame())
+
+#Calculate eigengenes
+colors=moduleColorsAutomatic.function 
+MEList=moduleEigengenes(df.function,colors=colors)
+MEs.function = MEList$eigengenes
+MEs.function.ori = MEs.function  
+# Remove "grey" module
+MEs.function <- MEs.function.ori  %>% select(-"MEgrey")
+
+
+# Choose a module assignment
+moduleColors= moduleColorsAutomatic.function 
+# Define numbers of genes and samples
+nhost = ncol(df_function)
+nSamples = nrow(df.trait) #PPVuse
+# Recalculate MEs with color labels
+MEs0 = moduleEigengenes(df_function, moduleColors)$eigengenes 
+MEs.ori = orderMEs(MEs0) 
+# Remove "grey" module
+MEs <- MEs.ori %>% dplyr::select(-"MEgrey")
+modTraitCor = cor(MEs, df.trait, use = "pairwise.complete.obs", method="spearman")
+modTraitP = corPvalueStudent(modTraitCor, nSamples)
+
+
+#Extract all gene name from all modules
+Preparation#################################
+modNames = substring(names(MEs.ori), 3)
+colname <- paste0("",modNames)
+N <- max(table(module_df$moduleLabelsAutomatic))
+Module <- length(names(MEs.ori))
+outcome_eigen <- createdf( N, Module, colnames = c( colname ) )
+modulelist <- paste0("",modNames)
+alltrait <- "PPVuse"
+#############################################
+  
+for (iii in alltrait) {
+  xx <- as.data.frame(df.trait[,iii])
+  names(xx) = iii
+  geneTraitSignificance = as.data.frame(cor(df.host, xx, use = "p"));
+  GSPvalue = as.data.frame(corPvalueStudent(as.matrix(geneTraitSignificance), nSamples));
+  names(geneTraitSignificance) = paste("GS.", names(xx), sep="");
+  names(GSPvalue) = paste("p.GS.", names(xx), sep="");
+  namegs <- paste0(names(geneTraitSignificance) )
+for (i in modulelist) {
+ column = match(i, modNames);
+ moduleGenes = moduleColors==i;
+ MM <- paste0("MM",i)
+#geneModuleMembership
+ df1<- geneModuleMembership
+ df2 = df1 %>% rownames_to_column(., "name")  
+ df3<- df2[moduleGenes, c(1,column+1)] %>% as.data.frame()
+ df4 = df3 %>% filter(abs(df3$MM) > 0.0)
+ df5 <- df4$name %>% as.data.frame()
+ MM.p<- paste0(df4$name)
+ #metabolite significance
+ df6<- geneTraitSignificance
+ df7 = df6 %>% rownames_to_column(., "name") 
+ df8<- df7[moduleGenes, 1:2] %>% as.data.frame()
+ df9 = df8 %>% filter(abs(df8[,2]) > 0.0)
+ df10 <- df9$name %>% as.data.frame()
+ MM.s<- paste0(df9$name)
+ #inner-merge
+ eigenm <- inner_join(df5, df10, by= ".") 
+ #put in outcome table
+ for (ii in 1:N) {
+   outcome_eigen[ii,i] <- paste0(eigenm$.)[ii]
+ }
+write.csv(outcome_eigen, paste0("df_metatranscriptome_in_allmodule.csv")) 
+}} 
+
+#Top5
+df_modTraitCor<- as.data.frame(modTraitCor)
+top <- arrange(df_modTraitCor, desc(abs(df_modTraitCor$PPVuse)))
+temp_head5  <- head(top,5)
+top5 <- paste0(rownames(temp_head5) ,"" )
+# Subset by top5
+eigenvalue_function.top5 <- dplyr::select(MEs.function, c(Sample_ID, all_of(top5)))
+```
+
+# Merge clinical, host response module, microbial composition module, and microbial function module datasets for the subsequent integrated analyses
+```{r}
+# Selecet variables in clinical data
+df_clinicaldata2 <- df_clinicaldata %>% dplyr::select(c(age, sex, respiratoryvirus, PPVuse)) #race/ethnicity, intensive care use(add if needed)
+
+# Merge
+df_integrated <- df_clinicaldata %>%  
+                left_join(eigenvalue_host.top5,    by="Sample_ID") %>% 
+                left_join(eigenvalue_composition.top5, by="Sample_ID") %>%   
+                left_join(eigenvalue_function.top5, by="Sample_ID")   
+```
+
+
+STEP C) Determine the integrated relationships of these dual-transcriptome modules with outcomes
+Main analysis (Outcome = PPV use, Covariates = age, sex, and respiratory virus)
+Sensitivity analysis 1 (Outcome = intensive care use, Covariates = age, sex, and respiratory virus)
+Sensitivity analysis 2 (#Outcome = PPV use, Covariates =age, sex, race/ethnicity, and respiratory virus)
+Sensitivity analysis 3 (#Outcome = intensive care use, Covariates = age, sex, race/ethnicity, and respiratory virus)
+
+```{r}
+#Heatmap of the median eigen-values (the first principal component) for the corresponding modules in each outcome group.
+df.heatmap <- df.all %>% dplyr::select(c()) # select modules,PPVuse, and ICUuse
+df.heatmap #+ autoscale 
+# df.heatmap.sam_auto そのままPC1
+df.heatmap2 <- createdf(15, 4, colnames = c("CPAP(+)", "CPAP(-)","ICU (+)","ICU (-)"))
+rownames(df.heatmap_2) <- names(df.heatmap )[1:15]
+
+# Group by CPAP
+df.heatmap0　<- df.heatmap  %>%  filter(df.heatmap$PPVuse == 0)
+df.heatmap1　<- df.heatmap  %>%  filter(df.heatmap$PPVuse == 1)
+for (i in 1:15) {
+  Mean0 <- mean(df.heatmap0[,i])
+  Mean1 <- mean(df.heatmap1[,i])
+  df.heatmap2[i,1] <- Mean0
+  df.heatmap2[i,2] <- Mean1
+}
+# Group by ICU
+df.heatmap0　<- df.heatmap %>%  filter(df.heatmap$ICUuse == 0)
+df.heatmap1　<- df.heatmap %>%  filter(df.heatmap$ICUuse == 1)
+for (i in 1:15) {
+  Mean0 <- mean(df.heatmap0[,i])
+  Mean1 <- mean(df.heatmap1[,i])
+  df.heatmap2[i,3] <- Mean0
+  df.heatmap2[i,4] <- Mean1
+}
+write.csv(df.heatmap2, "data_object_fig5A.csv")
+
+
+# Main analysis
+# Ridge regression
+myTrainingControl <- trainControl(method  = "LOOCV", 
+                                  returnResamp="all",
+                                  savePredictions = TRUE, 
+                                  classProbs = TRUE,
+                                  summaryFunction = twoClassSummary,
+                                  preProcOptions = NULL)
+
+# Grid
+train_grid.ridge <- expand.grid(alpha  = 0, lambda = seq(0, 1,  by=0.001) )
+
+fit_ridge <- caret::train(PPVuse ~ .,  
+                              data   = df_integrated, 
+                              method = "glmnet", 
+                              metric = "ROC",  
+                              tuneGrid  = train_grid.ridge,
+                              trControl = myTrainingControl
+                               )
+
+############
+# Decide model to evaluate
+model_ridge_final <- fit_ridge 
+###########
+
+# Check the fitted model
+plot(model_ridge_final)
+# Function get best result 
+get_best_result = function(caret_fit) {
+  best = which(rownames(caret_fit$results) == rownames(caret_fit$bestTune))
+  best_result = caret_fit$results[best, ]
+  rownames(best_result) = NULL
+  best_result
+}
+
+best_lambda <-  get_best_result2(model_ridge_final)[,2]
+
+# Best parameter
+model_ridge_final$bestTune
+# Result of best parameter1
+(ridge_full.or <- exp(coef(model_ridge_final$finalModel, s = best_lambda )))
+
+
+
+# Result of best parameter
+mat_coeff_ridge <- coef(model_ridge_final$finalModel,
+                              model_ridge_final$bestTune$lambda) 
+mat_coeff_ridge <- mat_coeff_ridge[-1,] %>%   
+                                        as.matrix()       
+df_coeff_ridge.pre <- mat_coeff_ridge %>% as.data.frame()
+df_coeff_ridge <- rownames_to_column(df_coeff_ridge.pre, var = "variable")
+names(df_coeff_ridge)[ which( names(df_coeff_ridge)=="V1") ] <- "coef"
+df_coeff_ridge$OR <- exp(df_coeff_ridge$coef)
+df_coeff_ridge
+
+
+####################################
+modulename <- df_coeff_ridge[,1]
+nsim <- 2000
+nofv <- length(modulename)
+# Create Data holder
+data_boot_holder <- createdf(nsim,nofv, colnames = c( modulename))
+result_or <- createdf(nofv,7, colnames = c( "Module","OR","lowCI","upCI", "Coef", "absCoef"))
+######################################
+
+# Loop
+set.seed(1)
+data_boot <- df_models
+for (i in 1:nsim)
+{
+   boot_rows <-sample(x=c(1:nrow(data_boot)), size=nrow(data_boot), replace=T)
+   data_boot2 <-data_boot[boot_rows,]
+   boot.ridge_full  <-   caret::train(PPVuse ~ .,  
+                              data   = df_integrated, 
+                              method = "glmnet", 
+                              metric = "ROC", 
+                              tuneGrid = expand.grid(lambda = best_lambda , alpha = 0),
+                              trControl = myTrainingControl
+                               )
+   coef <- coef(boot.ridge_full$finalModel, s = best_lambda)
+
+
+ for (ii in 1:nofv) {
+   data_boot_holder[i,ii] <- coef[ii+1,1]
+ }}
+
+
+# Extract Coef(Odds Ratio) -Confidence Interval
+for (i in 1:nofv) {
+  result_or[i,1] <-  df_coeff_ridge$variable[i] 
+  d = quantile(data_boot_holder[,i], c(0.025,0.5, 0.975),na.rm=T)
+  result_or[i,2] <- exp(d[2]) #0.5CI
+  result_or[i,3] <- exp(d[1]) #0.025CI
+  result_or[i,4] <- exp(d[3]) #0.975CI
+  result_or[i,5] <- (d[2]) #0.5CI
+  result_or[i,6] <- abs(d[2]) #0.5CI
+}
+
+# Make data_object
+# Repeat analysis with different outcomes and covariates
+#Main analysis (Outcome = PPV use, Covariates = age, sex, and respiratory virus)
+write.csv (result_or, "data_object_fig5B.csv")
+#Sensitivity analysis 1 (Outcome = intensive care use, covariates = age, sex, and respiratory virus)
+write.csv (result_or, "data_object_figS5.csv")
+#Sensitivity analysis 2 (#Outcome = PPV use, covariates =age, sex, race/ethnicity, and respiratory virus)
+write.csv (result_or, "data_object_figS6.csv")
+#Sensitivity analysis 3 (#Outcome = intensive care use, covariates = age, sex, race/ethnicity, and respiratory virus)
+write.csv (result_or, "data_object_figS7.csv")
+
+
+# Causal structure learning
+library("pcalg")
+library("tidyverse")
+library("Rgraphviz")
+
+df_fig5C <-  df_integrated #"data_object_fig5C.csv"
+
+# Run
+suffStat <- list(C=cor(df_fig5C),n=nrow(df_fig5C))
+
+fig5C <-  pcalg::pc(suffStat, 
+                    indepTest=gaussCItest, 
+                    p=ncol(df_pcalg), 
+                    skel.method = "stable.fast", 
+                    NAdelete = T,
+                    verbose=F,  
+                    conservative = F,
+                    solve.confl = F)
+
+# Visualization
+(fig5C <- Rgraphviz::plot(fi5C, 
+                labels=colnames(df_fig5C), 
+                main="Inferred DAG in PPV use"))
+```
+
+
+
+##########################################################################
+###############################FIGURE CODE################################
+##########################################################################
+#============================================================================
+#Figure 1: Analytic flow of integrated-omics analysis
+#============================================================================
+Figure 1 was made by using Lucidchart (https://www.lucidchart.com/pages/)
+
+
+#============================================================================
+#Figure 2:  Differential gene expression analysis of host transcriptome data with regard to the use of positive pressure ventilation in infants hospitalized for bronchiolitis
+#============================================================================
+
+#A) Volcano plot
+```{r }
+# Load data
+df_fig2A <-  read.csv("data_object_fig2A.csv", header=TRUE)
+
+# Create custom key-value pairs
+keyvals <- ifelse( df_fig2A$log2FoldChange < -0.58 & df_fig2A$padj <0.05 , "royalblue",
+                            ifelse(df_fig2A$log2FoldChange > 0.58 & df_fig2A$padj <0.05, "red2",
+                                  ifelse(abs(df_fig2A$log2FoldChange) >= 0.58 & df_fig2A$padj >= 0.05, "forestgreen",
+                                      ifelse(abs(df_fig2A$log2FoldChange) < 0.58 & df_fig2A$padj < 0.05, "#FFAB40", "grey30"))))
+levels(keyvals) <- c("grey30","red2","forestgreen","#FFAB40","royalblue" )
+
+
+keyvals[is.na(keyvals)] <- "grey30"
+names(keyvals)[keyvals == "red2"] <- "Upregulated*"
+names(keyvals)[keyvals == "grey30"] <- "Not significant"
+names(keyvals)[keyvals == "forestgreen"] <- "Log FC ≥|0.58|"
+names(keyvals)[keyvals == "#FFAB40"] <- "FDR<0.05"
+names(keyvals)[keyvals == "royalblue"] <- "Downregulated*"
+  
+levels(keyvals) <- c("Upregulated","Downregulated","Log FC ≥|0.58|","FDR<0.05","Not significant" )
+
+
+library("EnhancedVolcano")
+library("ggrepel")
+fig2A <- EnhancedVolcano::EnhancedVolcano(df_fig2A,
+    lab =  rownames(df_fig2A) ,               
+    x = 'log2FoldChange',
+    y = "padj", 
+    selectLab = c(""),
+    pCutoff = 0.05,
+    FCcutoff = 0.58, 
+    pointSize = 1,
+    legendPosition = "right",
+    colCustom = keyvals,
+    labSize = 3, 
+    title = NULL, 
+    subtitle = NULL, 
+    caption = NULL, 
+    xlab = bquote(~Log[2]~ 'fold change'),
+    ylab = bquote(~-Log[10]~ 'FDR')
+    )
+
+(fig2A_2 <- fig2A + 
+  ggplot2::coord_cartesian(xlim=c(-5, 5),ylim=c(0, 8)) + 
+  scale_x_continuous(breaks = c(-5,-3,-1,0,1,3,5))+ 
+  scale_y_continuous(breaks = c(0, 2.5, 5.0, 7.5)))
+```
+B)	Gene set enrichment analysis plot (transcriptome)
+```{r}
+df_fig2B <-  read.csv("data_object_fig2B.csv", header=TRUE)
+
+library("DT")
+# Tidy the results:
+df_fig2B <- df_fig2B %>%
+  as_tibble() 
+df_fig2B$absNES <- abs(df_fig2B$NES)
+
+#Select top 30
+df_fig2B <- df_fig2B %>% top_n(30, wt=-FDR)
+
+#facet 0 or 1
+df_fig2B$status <- ifelse(df_fig2B$NES > 0, "Up-regulated", "Down-regulated")
+
+#Round FDR value
+df_fig2B$FDR2 <- round(df_fig2B$FDR, 3)
+df_fig2B$FDR2[which(df_fig2B$FDR2 ==0.000)] <- 0.001
+
+#set color
+colors=c( "#0C2C84","#7FCDBB","#C7E9B4","#C7E9B4")
+color1 <- colorRampPalette(colors = colors)(1000)
+
+
+#plot
+fig2B <-       df_fig2B      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                    scale_colour_gradientn(colours = color1 , 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05","≥0.10"), 
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", colour="FDR", size="Gene ratio") + 
+                    scale_size_continuous(range = c(3, 10), 
+                               breaks = c (0.2, 0.3, 0.4, 0.5, 0.6),
+                               labels = c( "0.2", "0.3", "0.4", "0.5", "0.6")) +
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                )
+                          )
+
+#spacing between each facet
+(fig2B_2  <- fig2B + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                          legend.position="right"
+                      ) )
+```
+
+
+#============================================================================
+#Figure 3: Relationship of abundant microbial species with the risk of higher severity in infants hospitalized for bronchiolitis
+#============================================================================
+A)	Phylogenetic plot of top 20 
+Figure 3 was made by using Python with GraPhlAn software (https://huttenhower.sph.harvard.edu/graphlan/)
+Here is code for python
+graphlan.py --dpi 300 data_object_fig3A.xml fig3A.png --external_legends --size 5
+Reference: Wang DD, Nguyen LH, Li Y, et al. The gut microbiome modulates the protective association between a Mediterranean diet and cardiometabolic disease risk. Nat Med. 2021;27(2):333-343. doi:10.1038/s41591-020-01223-3
+B)　Pirate plots of top 10
+```{r}
+# Load data
+df_fig3B <-  read.csv("data_object_fig3B.csv", header=TRUE)
+
+library("ggplot2")
+library("ggpirate")
+(fig3B  <- df_fig3B %>% 
+                       ggplot(data = ., aes(x = PPVuse, y = Abundance)) +
+                       geom_jitter(aes( color = "black"),size = 1,color = "black", alpha=0.5, height = 0, width =0.22) +
+                       geom_violin(aes(color = Species, fill=PPVuse), color= "black", alpha=0.5) + 
+                       geom_pirate(aes(color = "black"),bars =F,violins = F,points=F, cis=T, lines=T,
+                                   lines_params = list(size = 0.1, width = 0.6, col="black"),
+                                   cis_params = list(fill = "white", size = 0.2, alpha = 0.4, width = 0.4)
+                       ) +
+                       scale_fill_manual(values=c("#4575B4", "#D73027")) + 
+                       labs(x = "", y = "\n Relative abundance \n ") +
+                       facet_wrap(~ Species, scales = "fixed", nrow = 2) +
+                       coord_flip(ylim=c(0, 0.8)) +
+                       theme_light() +
+                       theme( axis.text = element_text( size = 14 ),
+                       axis.text.x = element_text( size = 12),
+                       axis.title = element_text( size = 12),
+                       legend.position="none",
+                       strip.text = element_text(color= "black",size = 10, face = "bold.italic")) + 
+                       annotate("text", label = "FDR<0.001", size = 5, x = 2.5, y = 0.65) )
+```
+
+
+
+#============================================================================
+#Figure 4: Differential gene expression analysis of microbial function data with regard to the use of positive pressure ventilation in infants hospitalized for bronchiolitis
+#============================================================================
+A)	Volcano plot (metatranscriptome)
+```{r}
+#load data
+df_fig4A <- read.csv("data_object_fig4A.csv")
+
+rownames(df_fig4A) <- df_fig4A$name
+#df_volcano$p_adjust[which( df_volcano$p_adjust == 0.0000 ) ] <- 0.0001
+#head(df_volcano ,10)
+
+
+#Add label
+keyvals <- ifelse( df_fig4A$log2FC < -.58 & df_fig4A$p_adjust <0.05 , "royalblue",
+                            ifelse(df_fig4A$log2FC > 0.58 & df_fig4A$p_adjust <0.05, "red2",
+                                  ifelse(abs(df_fig4A$log2FC) >= 0.58 & df_fig4A$p_adjust >= 0.05, "forestgreen",
+                                      ifelse(abs(df_fig4A$log2FC) < 0.58 & df_fig4A$p_adjust < 0.05, "#FFAB40", "grey30"))))
+
+levels(keyvals) <- c("grey30","red2","forestgreen","#FFAB40","royalblue" )
+
+
+keyvals[is.na(keyvals)] <- "grey30"
+names(keyvals)[keyvals == "red2"] <- "Upregulated*"
+names(keyvals)[keyvals == "grey30"] <- "Not significant"
+names(keyvals)[keyvals == "forestgreen"] <- "Log FC ≥|0.58|"
+names(keyvals)[keyvals == "#FFAB40"] <- "FDR<0.05"
+names(keyvals)[keyvals == "royalblue"] <- "Downregulated*"
+  
+levels(keyvals) <- c("Upregulated","Downregulated","Log FC ≥|0.58|","FDR<0.05","Not significant" )
+
+
+#volcano
+library(EnhancedVolcano)
+library(ggrepel)
+
+fig4A <- EnhancedVolcano::EnhancedVolcano(df_fig4A,
+    lab =  rownames(df_fig4A) ,   
+    x = 'log2FC',
+    y = "p_adjust", 
+    selectLab = c(""),
+    pCutoff = 0.05,
+    FCcutoff = 0.58, 
+    pointSize = 1,
+    legendPosition = "right",
+    colCustom = keyvals,
+    labSize = 3, 
+    title = NULL, 
+    subtitle = NULL, 
+    caption = NULL, 
+    xlab = bquote(~Log[2]~ 'fold change'),
+    ylab = bquote(~-Log[10]~ 'FDR'),
+    )
+
+#change label
+(fig4A <- fig4A + 
+  ggplot2::coord_cartesian(xlim=c(-5, 5),ylim=c(0, 8)) + 
+  scale_x_continuous(breaks = c(-5,-3,-1,0,1,3,5))+ 
+  scale_y_continuous(breaks = c(0, 2.5, 5.0, 7.5)))
+```
+B)	Gene set enrichment analysis plot (metatranscriptome)
+```{r}
+df_fig4B <- read.csv("data_object_fig4B.csv")
+
+color2 = c( "#C34C17","#ED5000","#ED5000","#ED5000","#EE6315","#EF762A","#F08A3F","#F19D54","#F3B069","#F4C47E","#F5D793")
+
+fig_4B <-       df_fig4B      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                    scale_colour_gradientn(colours = color2, 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05", "≥0.10"),
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", colour="FDR", size="Gene ratio") + 
+                    scale_size_continuous(range = c(3, 10), 
+                               breaks = c (0.2, 0.3, 0.4, 0.5, 0.6),
+                               labels = c( "0.2", "0.3", "0.4", "0.5", "0.6")) +
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13 
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                )
+                          )
+#spacing between each facet
+(fig_4B  <- fig_4B + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                      legend.position="right",
+                      legend.text = element_text(size=10)
+                      ) )
+```
+
+
+
+#============================================================================
+#Figure 5: Integrated associations of the dual-transcriptome modules with the use of positive pressure ventilation in infants hospitalized for bronchiolitis
+#============================================================================
+A) Heatmap
+```{r}
+library("corrplot")
+library("ggplot2")
+
+#data matrix
+df_fig5A <- read.csv("data_object_fig5A.csv")
+df_fig5A <- df_fig5A[, 1:5]
+rownames(df_fig5A)  <-  df_fig5A[,1]
+df_fig5A <-  df_fig5A %>% dplyr::select(-"name")
+
+
+col <- colorRampPalette(c("#4575B4","#74ADD1","#ABD9E9","#E0F3F8","#FEE090","#FDAE61","#F46D43","#D73027"))
+
+ppi=300
+par(mar = c(5, 1, 1, 1)); 
+tiff(paste0 ("fig5A.tiff"), height = 13*ppi, width = 13*ppi, res=ppi)
+###########
+# Plot
+corrplot(as.matrix(df_fig5A), 
+         tl.cex=1.5,
+         tl.srt=60,
+         method = "circle",
+         win.asp = 1.0,
+         is.corr = FALSE,
+         #cl.lim=c(-0.055, 0.055),
+         col = col(100) , 
+         tl.pos = "lt", 
+         tl.col = c("black"),
+         cl.pos = "n",
+         bg="white",
+         shade.lwd =5  
+         )
+
+# Add legend
+colorlegend(
+  colbar = col(100),
+  labels = c(-0.055, -0.25, 0, 0.25, 0.055),
+  at = NULL,
+  xlim = c(5.5, 6.5),
+  ylim = c(6, 10),
+  vertical = TRUE,
+  ratio.colbar = 0.4,
+  lim.segment = "auto",
+  align = "l",
+  addlabels = TRUE#,
+  #main.cex = 10,
+) 
+
+# Add color bar name 
+legend(4.5,11, 
+  legend = c("Eigenvalue"), 
+  pch =NA, 
+  bty = "n", 
+  pt.cex = 3, 
+  cex = 1.5, 
+  text.col = "black", 
+  horiz = F , 
+  inset = c(0.1, 0.1))
+###########
+#Add line
+segments(2.5, 0.5, 2.5, 15.5,col="black", lty=3,  lwd=2) 
+segments(0.5, 5.5, 4.5, 5.5,col="black", lty=3,  lwd=2) 
+segments(0.5, 10.5, 4.5, 10.5,col="black", lty=3,  lwd=2) 
+###########
+#Add *
+legend(0.2 ,15.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,14.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,13.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,12.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,11.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,10.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,5.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,4.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,3.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,2.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(0.2 ,1.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,15.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,14.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,13.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,12.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,5.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+legend(2.2 ,1.7, legend = c("*"), pch =NA, bty = "n", cex = 2.5, text.col = "black",horiz = F )
+dev.off()
+```
+B) Lollipop plot
+```{r}
+#load dataset
+df_fig5B <- read.csv("data_object_fig5B.csv")
+df_fig5B$col <- as.factor(df_fig5B$col)
+
+
+df_fig5B$Module_f <- factor(df_fig5B$Module, levels=c("NADH dehydrogenase module" , "Oxidative stress response module"    ,"BCAA metabolism module" ,"mRNA metabolism module","Plasma membrane module","Haemophilus module" ,"Streptcoccus module" , "Moraxella module"  ,"MC-1 module"   ,"S. pneumoniae/S. aureus module","HR-1 module" , "Type I IFN module","GPCR module" ,"Neutrophi/IL-1 module"   ,"T cell regulation module" ))
+
+
+fig_5B <- 
+  df_fig5B %>%
+  ggplot(aes(Module_f,as.numeric(OR))) +
+  geom_segment( aes(x=Module_f, xend=Module_f, y=1, yend=as.numeric(OR), color= col)) +
+  geom_point( aes(color = col, size=as.numeric(absCoef)), fill=alpha("black", 1), shape=21, stroke=0) +
+  theme_light()  +
+  scale_color_manual(values=c("#4575B4", "#D73027"), 
+                     labels = c("Negative", "Positive"), 
+                     name = "Module") +
+  scale_fill_manual(values=c("#4575B4", "#D73027")) +
+  theme(legend.position = "bottom",
+                                panel.grid.major.x  = element_line(colour = alpha("black", 0.22)),
+                                panel.grid.minor.x  =element_blank(),
+                                panel.grid.major.y   =element_blank(),
+                                panel.grid.minor.y   =element_blank(),
+                                panel.background = element_blank(),
+                                text = element_text(size=9),
+                                plot.caption = element_text(hjust = 0, face= "plain"),
+                                axis.text.x = element_text(face= "plain", colour = "black", size=9),
+                                axis.text.y = element_text(face= "plain", colour = "black", size=9, hjust=0),
+                                axis.title.x = element_text(size=9),
+                                axis.title.y = element_text(size=9),
+                                legend.title = element_text(colour="black", size=9,  face="plain"),
+                                legend.text = element_text(colour="black", size=9, face="plain"),
+                                legend.background = element_rect(fill="grey90", colour = "white"),
+                                panel.border = element_blank(),
+                                axis.ticks.x = element_blank())+
+  geom_hline(yintercept = 1, linetype = 1, color = "lightgray") +
+  coord_flip() +
+  labs(x=" ",y="Odds ratio for PPV use", title="")  
+
+
+(fig_5B_2 <- fig_5B    
+            + scale_y_log10(limits = c(0.2,5.0), breaks = c(0.2,0.4,0.6,1.0,2.0,3.0,4.0,5.0)) 
+            + annotate(geom = "rect", ymin = 0.2, ymax = 5, xmin = 0.5, xmax = 5.5, fill = "grey80", alpha = 0.2)
+            + annotate(geom = "rect", ymin = 0.2, ymax = 5, xmin = 10.5, xmax = 15.7, fill = "grey80", alpha = 0.2)
+            + geom_point( aes(color = col, size=as.numeric(absCoef), fill=col, alpha=0.8), shape=21, stroke=1)          
+            + guides(size = "none", color ="none", alpha="none", fill= "none"))
+```
+C) Causal structural learning
+Figure 5C  was made by using Lucidchart (https://www.lucidchart.com/pages/)
+
+
+
+#============================================================================
+Supplementary Figure 1: Study flow diagram
+#============================================================================
+Supplementary Figure 1 was made by using Lucidchart (https://www.lucidchart.com/pages/)
+
+
+
+
+#============================================================================
+Supplementary Figure 2: Gene set enrichment analysis of host transcriptome data with regard to the use of positive pressure ventilation in infants hospitalized for bronchiolitis
+#============================================================================
+A) GO molecular function
+```{r}
+library("ggplot2")
+#load dataset
+df_figS2A <- read.csv("data_object_figS2A.csv")
+
+
+colors=c( "#0C2C84","#7FCDBB","#C7E9B4","#C7E9B4")
+color1 <- colorRampPalette(colors = colors)(1000)
+
+fig_S2A  <-      df_figS2A      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                    scale_colour_gradientn(colours = color1 , 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05","≥0.10"), 
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", colour="FDR", size="Gene ratio") + 
+                    scale_size_continuous(range = c(3, 10), 
+                               breaks = c (0.2, 0.3, 0.4, 0.5, 0.6),
+                               labels = c( "0.2", "0.3", "0.4", "0.5", "0.6")) +
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                ) 
+                          )
+#spacing between each facet
+fig_S2A  <- fig_S2A + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                          legend.position="right"
+                      ) 
+```
+B) GO cellular component
+```{r}
+#laod dataset
+df_figS2B <- read.csv("data_object_figS2B.csv")
+
+colors=c( "#0C2C84","#7FCDBB","#C7E9B4","#C7E9B4")
+color1 <- colorRampPalette(colors = colors)(1000)
+
+fig_S2B <-       df_figS2B      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                     scale_colour_gradientn(colours = color1 , 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05","≥0.10"), 
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", size="Gene ratio", colour="FDR") + 
+                    scale_size_continuous(range = c(3, 10),
+                               breaks = c (0.3, 0.4, 0.5, 0.6, 0.7),
+                               labels = c( "0.3", "0.4", "0.5", "0.6", "0.7")) +
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                )
+                          )
+#spacing between each facet
+(fig_S2B  <- fig_S2B + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                          legend.position="right"
+                      ))
+```
+
+
+
+
+#============================================================================
+Supplementary Figure 3: Relationship of abundant fungal species with the risk of higher severity in infants hospitalized for bronchiolitis
+#============================================================================
+```{r}
+library("ggpirate")
+df_figS3 <- read.csv("data_object_figS3.csv")
+df_figS3$Species_f <- factor(df_figS3$Species, levels=c("Malassezia restricta", 
+                                                        "Malassezia globosa", 
+                                                        "Sugiyamaella lignohabitans", 
+                                                        "Ramularia collo-cygni",  
+                                                        "Aspergillus heteromorphus", 
+                                                        "Melampsora larici-populina", 
+                                                        "Trametes versicolor",
+                                                        "Pseudogymnoascus destructans",
+                                                        "Phycomyces blakesleeanus",
+                                                        "Penicillium rubens"))
+
+
+figS3  <-  df_figS3 %>% 
+                       ggplot(data = ., aes(x = PPVuse, y = Abundance)) +
+                       geom_jitter(aes( color = "black"),size = 1,color = "black", alpha=0.5, height = 0, width =0.22) +
+                       geom_violin(aes(color = Species, fill=PPVuse), color= "black", alpha=0.5) + 
+                       geom_pirate(aes(color = "black"),bars =F,violins = F, points=F, cis=T,lines=T,
+                                   lines_params = list(size = 0.1, width = 0.6, col="black"),
+                                   cis_params = list(fill = "white", size = 0.2, alpha = 0.4, width = 0.4)
+                       ) +
+                       scale_fill_manual(values=c("#4575B4", "#D73027")) + 
+                       labs(x = "", y = "\n Relative abundance \n ") +
+                       facet_wrap(~ Species_f, scales = "fixed", nrow = 2) +
+                       coord_flip(ylim=c(0, 1.0 )) +
+                       theme_light() +
+                       theme( axis.text = element_text( size = 14 ),
+                       axis.text.x = element_text( size = 12),
+                       axis.title = element_text( size = 12),
+                       legend.position="none",
+                       strip.text = element_text(color= "black",size = 10, face = "bold.italic")) 
+
+labels <- data.frame(Species_f=c("Malassezia restricta", 
+                                 "Malassezia globosa", 
+                                 "Sugiyamaella lignohabitans", 
+                                 "Ramularia collo-cygni",  
+                                 "Aspergillus heteromorphus", 
+                                 "Melampsora larici-populina", 
+                                 "Trametes versicolor",
+                                 "Pseudogymnoascus destructans",
+                                 "Phycomyces blakesleeanus",
+                                 "Penicillium rubens"), 
+                     label=c("FDR<0.001", "FDR<0.001", "FDR<0.001","FDR<0.001", "FDR<0.001",
+                             "FDR<0.001","FDR<0.001", "FDR=0.10", "FDR<0.001","FDR<0.001"))
+
+
+labels$Species_f <- factor(labels$Species_f, levels=c("Malassezia restricta", 
+                                                      "Malassezia globosa", 
+                                                      "Sugiyamaella lignohabitans", 
+                                                      "Ramularia collo-cygni",  
+                                                      "Aspergillus heteromorphus", 
+                                                      "Melampsora larici-populina", 
+                                                      "Trametes versicolor",
+                                                      "Pseudogymnoascus destructans",
+                                                      "Phycomyces blakesleeanus",
+                                                      "Penicillium rubens" ))
+
+(figS3_2 <- figS3  +
+  geom_text(data = labels, aes(label=label, size= 4.5), x = 2.5, y = 0.80, inherit.aes = F))
+```
+
+
+
+#============================================================================
+Supplementary Figure 4: Gene set enrichment analysis of microbial function data with regard to the use of positive pressure ventilation in infants hospitalized for bronchiolitis
+#============================================================================
+A) GO molecular function
+```{r}
+#load dataset
+df_figS4A <- read.csv("data_object_figS4A.csv")
+
+color2 = c( "#C34C17","#ED5000","#ED5000","#ED5000","#EE6315","#EF762A","#F08A3F","#F19D54","#F3B069","#F4C47E","#F5D793")
+
+fig_S4A <-      df_figS4A      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                    scale_colour_gradientn(colours = color1 , 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05", "≥0.10"),
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", colour="FDR", size="Gene ratio") + 
+                    scale_size_continuous(range = c(3, 10), 
+                               breaks = c (0.2, 0.3, 0.4, 0.5, 0.6),
+                               labels = c( "0.2", "0.3", "0.4", "0.5", "0.6")) +
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                ) )
+
+#spacing between each facet
+(fig_S4A <- fig_S4A + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                      legend.position="right",
+                      legend.text = element_text(size=10)
+                      ))
+```
+B) GO cellular component
+```{r}
+#load dataset
+df_figS4B <- read.csv("data_object_figS4B.csv")
+
+color2 = c( "#C34C17","#ED5000","#ED5000","#ED5000","#EE6315","#EF762A","#F08A3F","#F19D54","#F3B069","#F4C47E","#F5D793")
+
+fig_S4B      <-     df_figS4B      %>%
+                    ggplot(aes(x = absNES,
+                               y=reorder(Goterm,absNES),
+                               colour = FDR2,
+                               size = pergene)) +
+                    geom_point() +
+                    facet_grid( ~ status) +
+                    expand_limits(  size= c (0.3, 0.8)) + 
+                    scale_x_continuous(limits = c(1, 2.5), 
+                                    breaks = c(1,2, 2.5),
+                                    labels = c("≤1", "2",  "2.5")
+                                    ) +
+                    scale_colour_gradientn(colours = color2 , 
+                                           space = "Lab",
+                                           limits=c(0.001,0.1), 
+                                           breaks = c (0.001, 0.05, 0.1),
+                                           labels = c( "≤0.001", "0.05", "≥0.10"),
+                                           oob = scales::squish,
+                                           na.value = "#C6DBEF" , 
+                                           guide=guide_colorbar(reverse=T)) +
+                    labs(x=expression(paste("Absolute normalized enrichment scores")), y="GO term", colour="FDR", size="Gene ratio") + 
+                    scale_size_continuous(range = c(3, 10),  
+                               breaks = c (0.2, 0.3, 0.4, 0.5, 0.6),
+                               labels = c( "0.2", "0.3", "0.4", "0.5", "0.6")) +
+                    #theme_minimal() + 
+                    theme(strip.background = element_rect(colour="black", 
+                                                          fill="white", 
+                                                          size=1.5, 
+                                                          linetype="solid"),
+                          strip.text.x = element_text(size = 15, color = "black", face = "bold"),
+                          axis.text.x = element_text(size=13 
+                                                     ),
+                          axis.text.y = element_text(size=13 
+                                               ), 
+                          axis.title.x = element_text(size=13
+                                                ), 
+                          axis.title.y = element_text( size=13
+                                                ))
+#spacing between each facet
+(fig_S4B_2  <- fig_S4B + 
+                theme(panel.spacing.x=unit(2, "lines"),
+                      legend.position="right",
+                      legend.text = element_text(size=10)
+                      ))
+```
+
+
+
+#============================================================================
+Supplementary Figure 5: Sensitivity analysis: Integrated relationship of the dual-transcriptome modules with the risk of intensive care use in infants hospitalized for bronchiolitis
+#============================================================================
+#Lollipop plot
+```{r}
+df_figS5 <- read.csv("data_object_figS5.csv")
+df_figS5$col <- as.factor(df_figS5$col)
+
+df_figS5$Module_f <- factor(df_figS5$Module, levels=c("NADH dehydrogenase module" , "Oxidative stress response module"    ,"BCAA metabolism module" ,"mRNA metabolism module","Plasma membrane module","Haemophilus module" ,"Streptcoccus module" , "Moraxella module"  ,"MC-1 module"   ,"S. pneumoniae/S. aureus module","HR-1 module" , "Type I IFN module","GPCR module" ,"Neutrophi/IL-1 module" ,"T cell regulation module" ))
+
+fig_S5 <- 
+  df_figS5 %>%
+  ggplot(aes(Module_f, as.numeric(OR))) +
+  geom_segment( aes(x=Module_f, xend=Module_f, y=1, yend=as.numeric(OR), color= col)) +
+  geom_point( aes(color = col, size=as.numeric(absCoef)), fill=alpha("black", 1), shape=21, stroke=0) +
+  theme_light()  +
+  scale_color_manual(values=c("#4575B4", "#D73027"), 
+                     labels = c("Negative", "Positive"), 
+                     name = "Module") + 
+  scale_fill_manual(values=c("#4575B4", "#D73027")) +
+  theme(legend.position = "bottom",
+                                panel.grid.major.x  = element_line(colour = alpha("black", 0.22)),
+                                panel.grid.minor.x  =element_blank(),
+                                panel.grid.major.y   =element_blank(),
+                                panel.grid.minor.y   =element_blank(),
+                                panel.background = element_blank(),
+                                text = element_text(size=9),
+                                plot.caption = element_text(hjust = 0, face= "plain"),
+                                axis.text.x = element_text(face= "plain", colour = "black", size=9),
+                                axis.text.y = element_text(face= "plain", colour = "black", size=9, hjust=0),
+                                axis.title.x = element_text(size=9),
+                                axis.title.y = element_text(size=9),
+                                legend.title = element_text(colour="black", size=9,  face="plain"),
+                                legend.text = element_text(colour="black", size=9, face="plain"),
+                                legend.background = element_rect(fill="grey90", colour = "white"),
+                                panel.border = element_blank(),
+                                axis.ticks.x = element_blank())+
+  geom_hline(yintercept = 1, linetype = 1, color = "lightgray") +
+  coord_flip() +
+  labs(x=" ",y="Odds ratio for intensive care use", title="") 
+
+(fig_S5_2<- fig_S5   
+            + scale_y_log10(limits = c(0.2,8.0), breaks = c(0.2,0.4,0.6,1.0,2.0,4.0,8.0)) 
+            + annotate(geom = "rect", ymin = 0.2, ymax = 8, xmin = 0.5, xmax = 5.5, fill = "grey80", alpha = 0.2)
+            + annotate(geom = "rect", ymin = 0.2, ymax = 8, xmin = 10.5, xmax = 15.7, fill = "grey80", alpha = 0.2)
+            + geom_point( aes(color = col, size=as.numeric(absCoef), fill=col, alpha=0.8), shape=21, stroke=1)          
+            + guides(size = "none", color ="none", alpha="none", fill= "none"))
+```
+
+
+
+#============================================================================
+Supplementary Figure 6. Sensitivity analysis adjusting for age, sex, race/ethnicity, and virus: Integrated relationship of the dual-transcriptome modules with the risk of positive pressure ventilation use in infants hospitalized for bronchiolitis
+#============================================================================
+#Lollipop plot
+```{r}
+#load dataset
+df_figS6 <- read.csv("data_object_figS6.csv")
+df_figS6$col <- as.factor(df_figS6$col)
+
+df_figS6$Module_f <- factor(df_figS6$Module, levels=c("NADH dehydrogenase module" , "Oxidative stress response module"    ,"BCAA metabolism module","mRNA metabolism module","Plasma membrane module","Haemophilus module" ,"Streptcoccus module", "Moraxella module","MC-1 module","S. pneumoniae/S. aureus module","HR-1 module", "Type I IFN module","GPCR module","Neutrophi/IL-1 module","T cell regulation module" ))
+
+
+fig_S6 <- 
+  df_figS6 %>%
+  ggplot(aes(Module_f,as.numeric(OR))) +
+  geom_segment( aes(x=Module_f, xend=Module_f, y=1, yend=as.numeric(OR), color= col)) +
+  geom_point( aes(color = col, size=as.numeric(absCoef)), fill=alpha("black", 1), shape=21, stroke=0) +
+  theme_light()  +
+  scale_color_manual(values=c("#4575B4", "#D73027"), 
+                     labels = c("Negative", "Positive"), 
+                     name = "Module") + 
+  scale_fill_manual(values=c("#4575B4", "#D73027")) +
+  theme(legend.position = "bottom",
+                                panel.grid.major.x  = element_line(colour = alpha("black", 0.22)),
+                                panel.grid.minor.x  =element_blank(),
+                                panel.grid.major.y   =element_blank(),
+                                panel.grid.minor.y   =element_blank(),
+                                panel.background = element_blank(),
+                                text = element_text(size=9),
+                                plot.caption = element_text(hjust = 0, face= "plain"),
+                                axis.text.x = element_text(face= "plain", colour = "black", size=9),
+                                axis.text.y = element_text(face= "plain", colour = "black", size=9, hjust=0),
+                                axis.title.x = element_text(size=9),
+                                axis.title.y = element_text(size=9),
+                                legend.title = element_text(colour="black", size=9,  face="plain"),
+                                legend.text = element_text(colour="black", size=9, face="plain"),
+                                legend.background = element_rect(fill="grey90", colour = "white"),
+                                panel.border = element_blank(),
+                                axis.ticks.x = element_blank())+
+  geom_hline(yintercept = 1, linetype = 1, color = "lightgray") +
+  coord_flip() +
+  labs(x=" ",y="Odds ratio for PPV use", title="")  
+
+(fig_S6_2 <- fig_S6     
+            + scale_y_log10(limits = c(0.2,5.0), breaks = c(0.2,0.4,0.6,1.0,2.0,3.0,4.0,5.0)) 
+            + annotate(geom = "rect", ymin = 0.2, ymax = 5, xmin = 0.5, xmax = 5.5, fill = "grey80", alpha = 0.2)
+            + annotate(geom = "rect", ymin = 0.2, ymax = 5, xmin = 10.5, xmax = 15.7, fill = "grey80", alpha = 0.2)
+            + geom_point( aes(color = col, size=as.numeric(absCoef), fill=col, alpha=0.8), shape=21, stroke=1)          
+            + guides(size = "none", color ="none", alpha="none", fill= "none"))
+```
+
+
+
+#============================================================================
+Supplementary Figure 7. Sensitivity analysis adjusting for age, sex, race/ethnicity, and virus: Integrated relationship of the dual-transcriptome modules with the risk of intensive care use in infants hospitalized for bronchiolitis
+#============================================================================
+#Lollipop plot
+```{r}
+df_figS7 <- read.csv("data_object_figS7.csv")
+df_figS7$col <- as.factor(df_figS7$col)
+
+
+df_figS7$Module_f <- factor(df_figS7$Module, levels=c("NADH dehydrogenase module", "Oxidative stress response module","BCAA metabolism module" ,"mRNA metabolism module","Plasma membrane module","Haemophilus module" ,"Streptcoccus module" , "Moraxella module","MC-1 module","S. pneumoniae/S. aureus module","HR-1 module", "Type I IFN module","GPCR module" ,"Neutrophi/IL-1 module","T cell regulation module" ))
+
+
+fig_S7 <- 
+  df_figS7 %>%
+  ggplot(aes(Module_f,as.numeric(OR))) +
+  geom_segment( aes(x=Module_f, xend=Module_f, y=1, yend=as.numeric(OR), color= col)) +
+  geom_point( aes(color = col, size=as.numeric(absCoef)), fill=alpha("black", 1), shape=21, stroke=0) +
+  theme_light()  +
+  scale_color_manual(values=c("#4575B4", "#D73027"), 
+                     labels = c("Negative", "Positive"), 
+                     name = "Module") + 
+  scale_fill_manual(values=c("#4575B4", "#D73027")) +
+  theme(legend.position = "bottom",
+                                panel.grid.major.x  = element_line(colour = alpha("black", 0.22)),
+                                panel.grid.minor.x  =element_blank(),
+                                panel.grid.major.y   =element_blank(),
+                                panel.grid.minor.y   =element_blank(),
+                                panel.background = element_blank(),
+                                text = element_text(size=9),
+                                plot.caption = element_text(hjust = 0, face= "plain"),
+                                axis.text.x = element_text(face= "plain", colour = "black", size=9),
+                                axis.text.y = element_text(face= "plain", colour = "black", size=9, hjust=0),
+                                axis.title.x = element_text(size=9),
+                                axis.title.y = element_text(size=9),
+                                legend.title = element_text(colour="black", size=9,  face="plain"),
+                                legend.text = element_text(colour="black", size=9, face="plain"),
+                                legend.background = element_rect(fill="grey90", colour = "white"),
+                                panel.border = element_blank(),
+                                axis.ticks.x = element_blank())+
+  geom_hline(yintercept = 1, linetype = 1, color = "lightgray") +
+  coord_flip() +
+  labs(x=" ",y="Odds ratio for intensive care use", title="")   
+
+
+
+(fig_S7_2<- fig_S7    
+            + scale_y_log10(limits = c(0.2,8.0), breaks = c(0.2,0.4,0.6,1.0,2.0,4.0,8.0)) 
+            + annotate(geom = "rect", ymin = 0.2, ymax = 8, xmin = 0.5, xmax = 5.5, fill = "grey80", alpha = 0.2)
+            + annotate(geom = "rect", ymin = 0.2, ymax = 8, xmin = 10.5, xmax = 15.7, fill = "grey80", alpha = 0.2)
+            + geom_point( aes(color = col, size=as.numeric(absCoef), fill=col, alpha=0.8), shape=21, stroke=1)          
+            + guides(size = "none", color ="none", alpha="none", fill= "none"))
+```
+
+
+
+#============================================================================
+Supplementary Figure 8: Correlation network among all dual-transcriptome modules and clinical variables
+#============================================================================
+#######################################
+#Dataset for cytoscape
+#######################################
+```{r}
+# Select
+df_cytoscape <- df.all %>% dplyr::select(c("Sample_ID" ,"Age", "Sex" ,"Race" ,"Virus","PPVuse",  66:89))
+
+
+rownames(df_cytoscape ) <- df_cytoscape $Sample_ID
+ddf_cytoscape  <- df_cytoscape [,-1]
+
+n <- dim(df_cytoscape )[2]
+for (i in 1:n) {
+  ddf_cytoscape [,i] <- as.numeric(df_cytoscape [,i])
+}
+res <- WGCNA::cor(as.matrix(df_cytoscape), method="spearman")
+
+###################
+# flattenCorrMatrix
+###################
+# cormat : matrix of the correlation coefficients
+# pmat : matrix of the correlation p-values
+flattenCorrMatrix <- function(cormat, pmat) {
+  ut <- upper.tri(cormat)
+  data.frame(
+    row = rownames(cormat)[row(cormat)[ut]],
+    column = rownames(cormat)[col(cormat)[ut]],
+    cor  =(cormat)[ut],
+    p = pmat[ut]
+    )
+}
+corrmat <- flattenCorrMatrix(res$r, res$P)
+write.csv(corrmat ,"data_object_figS8.csv", row.names = F) 
+```
+Supplementary Figure 8 was made by using Cytoscape (https://cytoscape.org/)
+Dataset= "data_object_figS8.csv"
+
+
+
+#============================================================================
+Supplementary Figure 9: Log-log plot of whole-network connectivity distribution of host response, microbial composition, and microbial function
+#============================================================================
+```{r}
+#Host
+loglogplot_host <- read.csv("data_object_figS9_HR.csv")
+loglogplot_host <- as_vector(loglogplot_host)
+# Plot a scale free topology plot
+WGCNA::scaleFreePlot(loglogplot_host)
+
+#Microbiome composition
+loglogplot_composition <- read.csv("data_object_figS9_MC.csv")
+loglogplot_composition <- as_vector(loglogplot_composition)
+# Plot a scale free topology plot
+WGCNA::scaleFreePlot(loglogplot_composition)
+
+#Microbiome function
+loglogplot_function <- read.csv("data_object_figS9_MF.csv")
+loglogplot_function <- as_vector(loglogplot_function)
+# Plot a scale free topology plot
+WGCNA::scaleFreePlot(loglogplot_function)
+```
+
+
+
+
+############################################################
+ENDENDENDENDENDENDENDENDENDENDENDENDENDENDENDENDENDENDENDEND
+############################################################
+
+
+
